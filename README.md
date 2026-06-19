@@ -5,7 +5,7 @@
 [![Domains](https://img.shields.io/badge/Domains-11-blue.svg)](./skills/)
 [![Works with](https://img.shields.io/badge/Works_with-Amazon_Quick_|_Kiro_|_Claude_Code_|_Codex-purple.svg)](#platform-compatibility)
 
-A curated collection of agent skills for healthcare and life sciences (HCLS) workflows, following the [Agent Skills open standard](https://agentskills.io). **These 38 domain skills make any AI agent measurably better at HCLS questions.** In a [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (380 single-skill + 30 cross-skill) judged by Claude Opus 4.7, skills win **69.5%** of head-to-head comparisons, with **78% critical thinking** and **69% scientific accuracy** win rates. Skills work on 20+ platforms including Kiro, Amazon Quick, Amazon Bedrock AgentCore, AWS Strands SDK, Claude Code, OpenAI Codex, CrewAI, LangChain, and more.
+A curated collection of agent skills for healthcare and life sciences (HCLS) workflows, following the [Agent Skills open standard](https://agentskills.io). **These 38 domain skills make any AI agent measurably better at HCLS questions.** In a [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (380 single-skill + 30 cross-skill) judged by Claude Opus 4.7, skills win **70%** of head-to-head comparisons, with **78% critical thinking** and **69% scientific accuracy** win rates. Skills work on 20+ platforms including Kiro, Amazon Quick, Amazon Bedrock AgentCore, AWS Strands SDK, Claude Code, OpenAI Codex, CrewAI, LangChain, and more.
 
 Skills fall into two categories: **reasoning skills** encode methodology, decision frameworks, and domain expertise to guide the agent's thinking (e.g., ACMG variant classification, target trial emulation, HEDIS measure specification); **pipeline skills** encode tool-specific commands, code patterns, and parameter tables that produce runnable artifacts (e.g., GATK4 variant calling, RDKit cheminformatics, HL7v2 parsing). Together they make any AI agent a competent collaborator across [genomics](#genomics), [single-cell analysis](#single-cell-analysis), [medical imaging](#medical-imaging), [protein structure](#protein-structure), [translational research](#cross-domain), [pharmacoepidemiology](#pharmacoepidemiology--real-world-data), [clinical data](#clinical-data), [drug discovery](#drug-discovery), [proteomics](#proteomics), [clinical data review](#clinical-data-review), [multi-omics integration](#multi-omics-integration), [healthcare operations](#healthcare-operations), [machine learning](#cross-domain), and [AWS architecture](#cross-domain).
 
@@ -136,8 +136,14 @@ This is what raises the floor for every scientist without lowering the ceiling. 
 ## Installation
 
 ```bash
-git clone <repo-url> ~/kiro-skills-hcls
-cd ~/kiro-skills-hcls
+npx skills add awslabs/hcls-agent-skills
+```
+
+Or clone the repository for full control:
+
+```bash
+git clone https://github.com/awslabs/hcls-agent-skills.git
+cd ./hcls-agent-skills
 ./install.sh --target <platform>
 ```
 
@@ -168,7 +174,7 @@ These skills follow the [Agent Skills open standard](https://agentskills.io) (`S
 
 Or load individual skills on the fly:
 ```
-/context add ~/kiro-skills-hcls/skills/variant-calling/SKILL.md
+/context add ./hcls-agent-skills/skills/variant-calling/SKILL.md
 ```
 
 #### Multi-Agent Mode (Kiro)
@@ -197,6 +203,17 @@ The coordinator routes queries to 8 domain specialists:
 
 See [`docs/multiagent-architecture.md`](./docs/multiagent-architecture.md) for the full architecture.
 
+### Amazon Quick
+
+Amazon Quick loads skills via GUI upload of individual `SKILL.md` files:
+
+```bash
+# See which skills to upload and instructions
+./install.sh --target quick-desktop
+```
+
+Upload path: **Settings → Capabilities → Skills → Upload** → select a `SKILL.md` file. Start with one domain and add more as needed.
+
 ### Claude Code
 
 ```bash
@@ -205,17 +222,6 @@ See [`docs/multiagent-architecture.md`](./docs/multiagent-architecture.md) for t
 ```
 
 Skills auto-activate when Claude Code detects relevant topics in your prompts. No agent config needed — Claude Code discovers skills from `.claude/skills/` automatically.
-
-### Quick Desktop
-
-Quick Desktop loads skills via GUI upload of individual `SKILL.md` files:
-
-```bash
-# See which skills to upload and instructions
-./install.sh --target quick-desktop
-```
-
-Upload path: **Settings → Capabilities → Skills → Upload** → select a `SKILL.md` file. Start with one domain and add more as needed.
 
 ## Quick Start
 
@@ -249,7 +255,7 @@ open eval/results/review.html
 
 ## Customization
 
-Want to modify a skill for your org, or create a new one? See [CUSTOMIZING.md](./CUSTOMIZING.md) for practical guidance on adapting skills to your workflows.
+Want to modify a skill for your org, or create a new one? See [CUSTOMIZING.md](./CUSTOMIZING.md) and [SKILL_DESIGN_GUIDE.md](./SKILL_DESIGN_GUIDE.md) for practical guidance on adapting skills to your workflows.
 
 ## Contributing
 
