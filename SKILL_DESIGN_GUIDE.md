@@ -6,7 +6,7 @@ fileMatchPattern: 'skills/*/SKILL.md'
 
 # Skill Design Guide
 
-What makes a skill actually improve agent responses? This guide distills patterns from our [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (v3), a structural audit of all 38 skills, and community best practices from the [Agent Skills standard](https://agentskills.io).
+What makes a skill actually improve agent responses? This guide distills patterns from our [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (v3–v9), a structural audit of all 38 skills, and community best practices from the [Agent Skills standard](https://agentskills.io).
 
 **Method:** Every SKILL.md was audited for 10 structural metrics (line count, code blocks, decision trees, tables, gotcha items, numbered steps, numeric thresholds, description length, trigger keywords, output format sections). These were cross-referenced with per-skill win rates, Cohen's d, and per-dimension deltas from the pairwise evaluation.
 

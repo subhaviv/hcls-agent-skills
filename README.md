@@ -5,7 +5,7 @@
 [![Domains](https://img.shields.io/badge/Domains-11-blue.svg)](./skills/)
 [![Works with](https://img.shields.io/badge/Works_with-Amazon_Quick_|_Kiro_|_Claude_Code_|_Codex-purple.svg)](#platform-compatibility)
 
-A curated collection of agent skills for healthcare and life sciences (HCLS) workflows, following the [Agent Skills open standard](https://agentskills.io). **These 38 domain skills make any AI agent measurably better at HCLS questions.** In a [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (380 single-skill + 30 cross-skill) judged by Claude Opus 4.7, skills win **70%** of head-to-head comparisons, with **78% critical thinking** and **69% scientific accuracy** win rates. Skills work on 20+ platforms including Kiro, Amazon Quick, Amazon Bedrock AgentCore, AWS Strands SDK, Claude Code, OpenAI Codex, CrewAI, LangChain, and more.
+A curated collection of agent skills for healthcare and life sciences (HCLS) workflows, following the [Agent Skills open standard](https://agentskills.io). **These 38 domain skills make any AI agent measurably better at HCLS questions.** In a [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (380 single-skill + 30 cross-skill) judged by Claude Opus 4.7, skills win **70–86%** of head-to-head comparisons depending on harness, with **up to 85% critical thinking** and **up to 87% scientific accuracy** win rates. Skills work on 20+ platforms including Kiro, Amazon Quick, Amazon Bedrock AgentCore, AWS Strands SDK, Claude Code, OpenAI Codex, CrewAI, LangChain, and more.
 
 Skills fall into two categories: **reasoning skills** encode methodology, decision frameworks, and domain expertise to guide the agent's thinking (e.g., ACMG variant classification, target trial emulation, HEDIS measure specification); **pipeline skills** encode tool-specific commands, code patterns, and parameter tables that produce runnable artifacts (e.g., GATK4 variant calling, RDKit cheminformatics, HL7v2 parsing). Together they make any AI agent a competent collaborator across [genomics](#genomics), [single-cell analysis](#single-cell-analysis), [medical imaging](#medical-imaging), [protein structure](#protein-structure), [translational research](#cross-domain), [pharmacoepidemiology](#pharmacoepidemiology--real-world-data), [clinical data](#clinical-data), [drug discovery](#drug-discovery), [proteomics](#proteomics), [clinical data review](#clinical-data-review), [multi-omics integration](#multi-omics-integration), [healthcare operations](#healthcare-operations), [machine learning](#cross-domain), and [AWS architecture](#cross-domain).
 
@@ -23,7 +23,7 @@ Agent skills close this gap. A skill encodes the structured reasoning that exper
 
 3. **Encodes what textbooks don't.** Skills capture tacit and institutional knowledge: which bioinformatics parameters work for your sequencer, which reagent vendor to trust, which clinical codes your payer actually accepts. The kind of judgment that lives in a senior scientist's head and takes years to transfer.
 
-Our evaluation across 38 skills and 11 HCLS domains shows that skilled agents win 69.5% of head-to-head comparisons with critical thinking (the ability to apply the right framework, challenge assumptions, and flag limitations) improving most results (78% win rate, Cohen's d = 0.65). Response variance drops by up to 51%. Outputs become reproducible, not just occasionally correct. And the biggest gains appear exactly where unguided agents fail most: on the hard, multi-step regulatory and methodological questions where getting it wrong has consequences.
+The biggest gains appear exactly where unguided agents fail most: on the hard, multi-step regulatory and methodological questions where getting it wrong has consequences. Outputs become reproducible, not just occasionally correct.
 
 This is what raises the floor for every scientist without lowering the ceiling. Skills don't skip the learning; they provide scaffolding so a new postdoc's analysis meets the same methodological standard as the PI's while they build understanding of *why* each step matters. The work shifts from instructing the agent ("here's how to avoid immortal time bias") to exercising judgment at a higher level ("is a new-user active-comparator design even the right approach?").
 
@@ -244,14 +244,13 @@ An automated evaluation suite measures whether skills improve agent responses. S
 
 **Quick run:**
 ```bash
-conda activate drift-experiments
-./install.sh --target kiro --path .
-python -m eval.run --parallel 2 --version v1
+uv venv --python 3.12 && uv pip install -e .
+python -m eval.run --parallel 2 --version v4 --pairwise
 python eval/build_review.py
 open eval/results/review.html
 ```
 
-**Latest results (pairwise, 410 prompts — 38 skills + 3 cross-skill categories):** Overall delta **+1.5**, skills win rate **69.5%**, critical thinking **+3.4**. Eval reports show 41 entries: 38 standalone skills plus 3 cross-skill prompt categories that test multi-skill activation. See [`eval/TECHNICAL_REPORT.md`](./eval/TECHNICAL_REPORT.md) for the full analysis.
+**Latest results (pairwise, 410 prompts — 38 skills + 3 cross-skill categories):** Overall win rate **70–86%** (v9 Strands: 85.9%, d=0.97; v3 kiro-cli: 69.5%, d=0.39), critical thinking **77–85%**. Eval reports show results across 8 versions testing different harness configurations. See [`eval/TECHNICAL_REPORT.md`](./eval/TECHNICAL_REPORT.md) and [`eval/HARNESS_EFFECTS.md`](./eval/HARNESS_EFFECTS.md) for the full analysis.
 
 ## Customization
 

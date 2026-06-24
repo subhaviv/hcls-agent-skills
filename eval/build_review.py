@@ -232,6 +232,9 @@ summary:hover{text-decoration:underline}
 <p style="font-size:.8rem">Both responses sent in a single judge call as Response A / Response B. Position randomized 50/50 per prompt. Tool-call artifacts stripped from both responses (sanitized). Judge scores both on all dimensions and declares a winner.</p>
 <p style="margin-top:8px"><b>Pairwise (v3):</b> Both responses sent in one call, sanitized, position randomized. Most sensitive method for detecting quality differences.</p>
 </div></details>
+<details style="margin-top:12px" id="activation-details"><summary style="font-size:.85rem;color:#4338ca;cursor:pointer">🎯 Skill Activation Analysis</summary>
+<div style="font-size:.82rem;margin-top:8px;line-height:1.6" id="activation-panel"></div>
+</details>
 </div>
 <div id="skills-container"></div>
 <script>
@@ -251,7 +254,8 @@ function filterPrompts(prompts){
   if(currentFilter==='all')return prompts;
   // 'activated': only prompts where intended or unintended skill loaded
   return prompts.filter(pr=>{
-    const fl=DATA.skill_flags[pr.id];
+    const flMap=(DATA.skill_flags_per_version||{})[currentVersion]||DATA.skill_flags;
+    const fl=flMap[pr.id];
     if(!fl)return false;
     return fl.labels.includes('intended_loaded')||fl.labels.includes('unintended_loaded');
   });
@@ -410,6 +414,27 @@ function render(){
   let h=`<div class="stat-card"><div class="label">Overall</div><div class="value pos">${sm.winners&&sm.n?(sm.winners.skills/sm.n*100).toFixed(1)+'%':'—'}</div><div style="font-size:.65rem;color:#888">d=${sm.cohens_d} · Δ${sm.overall_delta>0?'+':''}${sm.overall_delta}</div></div>`;
   for(let d of DIMS){const v=sm.dims[d];h+=`<div class="stat-card"><div class="label">${DLABEL[d]}</div><div class="value ${dc(v.delta)}">${(v.win_skills/sm.n*100).toFixed(0)}%</div><div style="font-size:.65rem;color:#888">d=${v.cohens_d} · Δ${v.delta>0?'+':''}${v.delta}</div></div>`}
   sg.innerHTML=h;
+
+  // Activation metrics panel (per-version)
+  const amPerVer=DATA.activation_metrics_per_version||{};
+  const am=amPerVer[currentVersion]||DATA.activation_metrics;
+  if(am){
+    const ap=document.getElementById('activation-panel');
+    let ah=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px">`;
+    ah+=`<div class="stat-card"><div class="label">Precision</div><div class="value">${(am.precision*100).toFixed(1)}%</div><div style="font-size:.65rem;color:#888">|target∩loaded|/|loaded|</div></div>`;
+    ah+=`<div class="stat-card"><div class="label">Recall</div><div class="value">${(am.recall*100).toFixed(1)}%</div><div style="font-size:.65rem;color:#888">|target∩loaded|/|target|</div></div>`;
+    ah+=`<div class="stat-card"><div class="label">Unintended Rate</div><div class="value">${(am.unintended_rate*100).toFixed(1)}%</div><div style="font-size:.65rem;color:#888">|loaded-target|/|loaded|</div></div>`;
+    ah+=`</div>`;
+    ah+=`<h4 style="margin:8px 0 6px">Win Rate by Activation Pattern</h4>`;
+    ah+=`<table class="dim-table" style="text-align:left"><tr><th>Pattern</th><th>Count</th><th>Win Rate</th><th>Wins</th><th>Losses</th><th>Ties</th></tr>`;
+    for(let row of am.confusion_matrix){
+      const wr=row.count>0?`<span class="${row.win_rate>=60?'pos':row.win_rate<50?'neg':'neu'}">${row.win_rate}%</span>`:'—';
+      ah+=`<tr><td>${row.pattern}</td><td>${row.count}</td><td>${wr}</td><td class="pos">${row.wins}</td><td class="neg">${row.losses}</td><td>${row.ties}</td></tr>`;
+    }
+    ah+=`</table>`;
+    ah+=`<p style="font-size:.75rem;color:#666;margin-top:6px"><b>Interpretation:</b> If "Only intended skill(s)" win rate ≥ overall win rate, the benefit comes from targeted activation, not bulk context injection.</p>`;
+    ap.innerHTML=ah;
+  }
   document.getElementById('subtitle').innerHTML=ft+vt+sf+`${filteredSkills.length} skills, ${sm.n} prompts`;
 
   // Use filteredSkills for rendering
@@ -442,7 +467,8 @@ function render(){
       const tabSkills=[];
       const seen=new Set();
       for(let pr of sk.prompts){
-        const fl=DATA.skill_flags[pr.id];
+        const flMap=(DATA.skill_flags_per_version||{})[currentVersion]||DATA.skill_flags;
+    const fl=flMap[pr.id];
         if(fl&&fl.target){fl.target.forEach(t=>{if(!seen.has(t)&&DATA.skill_content[t]){seen.add(t);tabSkills.push(t)}})}
       }
       if(tabSkills.length){
@@ -469,7 +495,8 @@ function render(){
       s+=`<span class="pos">▲${dimWins}</span> <span class="neg">▼${dimLosses}</span> <span class="neu">=${dimTies}</span>`;
       if(pr.winner)s+=` <span style="font-weight:600;color:${pr.winner==='skills'?'#16a34a':pr.winner==='baseline'?'#dc2626':'#666'}">${pr.winner}</span>`;
       s+=`</span>`;
-      const fl=DATA.skill_flags[pr.id];
+      const flMap=(DATA.skill_flags_per_version||{})[currentVersion]||DATA.skill_flags;
+    const fl=flMap[pr.id];
       if(fl){const flagMap={"intended_loaded":["✓","flag-intended"],"unintended_loaded":["⚠","flag-unintended"],"intended_not_loaded":["✗","flag-missing"],"no_skill_loaded":["○","flag-none"]};for(let l of fl.labels){const[txt,cls]=flagMap[l]||["?","flag-none"];s+=`<span class="flag ${cls}" style="margin-left:4px">${txt}</span>`}}
       s+=`</summary>`;
       if(pt)s+=`<div class="prompt-text">${esc(pt)}</div>`;
@@ -509,7 +536,8 @@ function render(){
         }
         s+=`</div>`;
         if(cond==='skills'){
-          const fl=DATA.skill_flags[pr.id];
+          const flMap=(DATA.skill_flags_per_version||{})[currentVersion]||DATA.skill_flags;
+    const fl=flMap[pr.id];
           if(fl){
             s+=`<div style="margin:4px 0">`;
             const flagMap={"intended_loaded":["✓ Intended loaded","flag-intended"],"unintended_loaded":["⚠ Unintended loaded","flag-unintended"],"intended_not_loaded":["✗ Intended not loaded","flag-missing"],"no_skill_loaded":["○ No skill loaded","flag-none"]};
@@ -530,6 +558,163 @@ function render(){
 }
 render();
 </script></body></html>"""
+
+
+def compute_activation_metrics(skill_flags: dict, scores: list, targets: dict) -> dict:
+    """Compute activation precision, recall, and confusion matrix with win rates.
+
+    Returns a dict with:
+    - precision: |target ∩ loaded| / |loaded|
+    - recall: |target ∩ loaded| / |target|
+    - unintended_rate: |loaded - target| / |loaded|
+    - confusion_matrix: list of {pattern, count, win_rate, prompts}
+    """
+    # Build a lookup from prompt_id -> winner
+    winners = {}
+    for s in scores:
+        winners[s["id"]] = s.get("winner", "tie")
+
+    # Compute precision/recall across all prompts
+    total_target = 0
+    total_loaded = 0
+    total_intersection = 0
+    total_unintended = 0
+
+    # Confusion matrix buckets
+    patterns = {
+        "clean": [],           # Only intended skill(s) loaded
+        "intended_plus_same": [],  # Intended + same-domain unintended
+        "intended_plus_cross": [], # Intended + cross-domain unintended
+        "only_unintended": [],     # Only unintended skill(s) loaded
+        "no_skill": [],            # No skill loaded
+    }
+
+    # Load domain mapping from README skill catalog groupings
+    SKILL_DOMAIN_MAP = {
+        # Genomics
+        "genomic-variant-interpretation": "genomics",
+        "variant-calling": "genomics",
+        "rna-seq-analysis": "genomics",
+        "ngs-quality-control": "genomics",
+        # Single-Cell Analysis
+        "biomarker-discovery": "single-cell",
+        "scrna-seq-pipeline": "single-cell",
+        "cell-type-annotation": "single-cell",
+        "trajectory-analysis": "single-cell",
+        # Medical Imaging
+        "imaging-study-design": "imaging",
+        "digital-pathology": "imaging",
+        "dicom-processing": "imaging",
+        "radiology-preprocessing": "imaging",
+        # Protein Structure
+        "structure-based-drug-design": "protein-structure",
+        "protein-structure-analysis": "protein-structure",
+        "molecular-docking": "protein-structure",
+        # Cross-Domain
+        "translational-research": "cross-domain",
+        "ml-researcher": "cross-domain",
+        "aws-genai-ml-architect": "cross-domain",
+        # Pharmacoepidemiology & Real-World Data
+        "pharmacoepidemiology": "pharma-rwd",
+        "rwd-cohort-analysis": "pharma-rwd",
+        # Clinical Data
+        "clinical-data-standards": "clinical-data",
+        "ehr-data-parsing": "clinical-data",
+        # Drug Discovery
+        "drug-repurposing": "drug-discovery",
+        "cheminformatics": "drug-discovery",
+        # Proteomics
+        "quantitative-proteomics": "proteomics",
+        # Clinical Data Review
+        "cdisc-compliance": "clinical-data-review",
+        "edc-data-validation": "clinical-data-review",
+        # Multi-Omics Integration
+        "multi-omics-integration": "multi-omics",
+        "multi-omics-pipeline": "multi-omics",
+        # Healthcare Operations
+        "claims-billing-rules": "healthcare-ops",
+        "claims-analytics": "healthcare-ops",
+        "risk-adjustment-strategy": "healthcare-ops",
+        "risk-adjustment": "healthcare-ops",
+        "pa-clinical-policy": "healthcare-ops",
+        "pa-decision-automation": "healthcare-ops",
+        "hedis-measure-specification": "healthcare-ops",
+        "risk-stratification-indices": "healthcare-ops",
+        "quality-measures": "healthcare-ops",
+    }
+    skill_domains = SKILL_DOMAIN_MAP
+    # Better: use the prompt's domain field
+    prompt_domains = {}
+    for s in scores:
+        prompt_domains[s["id"]] = s.get("domain", "")
+
+    for pid, flags in skill_flags.items():
+        target_set = set(targets.get(pid, []))
+        loaded_set = set(flags.get("loaded", []))
+
+        total_target += len(target_set)
+        total_loaded += len(loaded_set)
+        intersection = target_set & loaded_set
+        total_intersection += len(intersection)
+        total_unintended += len(loaded_set - target_set)
+
+        # Classify pattern
+        labels = set(flags.get("labels", []))
+        if "no_skill_loaded" in labels or not loaded_set:
+            patterns["no_skill"].append(pid)
+        elif loaded_set and not intersection:
+            patterns["only_unintended"].append(pid)
+        elif intersection and not (loaded_set - target_set):
+            patterns["clean"].append(pid)
+        else:
+            # Has intended AND unintended — classify by domain
+            unintended = loaded_set - target_set
+            prompt_domain = prompt_domains.get(pid, "")
+            # Check if unintended skills share the domain with intended
+            same_domain = any(
+                skill_domains.get(u, "") == skill_domains.get(t, "x")
+                for u in unintended for t in target_set
+            )
+            if same_domain:
+                patterns["intended_plus_same"].append(pid)
+            else:
+                patterns["intended_plus_cross"].append(pid)
+
+    # Build confusion matrix with win rates
+    matrix = []
+    pattern_labels = {
+        "clean": "Only intended skill(s)",
+        "intended_plus_same": "Intended + same-domain extra",
+        "intended_plus_cross": "Intended + cross-domain extra",
+        "only_unintended": "Only unintended skill(s)",
+        "no_skill": "No skill loaded",
+    }
+    for key, label in pattern_labels.items():
+        pids = patterns[key]
+        count = len(pids)
+        if count > 0:
+            wins = sum(1 for p in pids if winners.get(p) == "skills")
+            losses = sum(1 for p in pids if winners.get(p) == "baseline")
+            ties = count - wins - losses
+            win_rate = round(wins / count * 100, 1)
+        else:
+            wins = losses = ties = 0
+            win_rate = 0
+        matrix.append({
+            "pattern": label, "count": count,
+            "wins": wins, "losses": losses, "ties": ties,
+            "win_rate": win_rate,
+        })
+
+    return {
+        "precision": round(total_intersection / total_loaded, 3) if total_loaded else 0,
+        "recall": round(total_intersection / total_target, 3) if total_target else 0,
+        "unintended_rate": round(total_unintended / total_loaded, 3) if total_loaded else 0,
+        "total_prompts": len(skill_flags),
+        "total_loaded": total_loaded,
+        "total_target": total_target,
+        "confusion_matrix": matrix,
+    }
 
 
 def main():
@@ -563,24 +748,25 @@ def main():
         return
 
     prompts, targets = load_prompts(prompts_dir)
-    # Load responses — merge from all versioned subdirectories
-    responses = {}
-    if args.version:
-        resp_dir = results_dir / "responses" / args.version
-        if not resp_dir.exists():
-            resp_dir = results_dir / "responses"
-        responses = load_responses(resp_dir)
-    else:
-        # Multi-version: load from each version's subdirectory, latest wins on conflict
-        for label in sorted(score_versions.keys()):
-            resp_dir = results_dir / "responses" / label
-            if resp_dir.exists():
-                responses.update(load_responses(resp_dir))
-        # Fall back to flat directory if nothing found
-        if not responses:
-            responses = load_responses(results_dir / "responses")
+    # Load responses per version
+    responses_per_version = {}
+    for label in sorted(score_versions.keys()):
+        resp_dir = results_dir / "responses" / label
+        if resp_dir.exists():
+            responses_per_version[label] = load_responses(resp_dir)
+    # Fall back to flat directory if nothing found
+    if not responses_per_version:
+        responses_per_version["default"] = load_responses(results_dir / "responses")
+    # Use latest for display
+    responses = list(responses_per_version.values())[-1]
     skill_content = load_skill_content(Path("skills"))
-    skill_flags = detect_skill_flags(responses, targets)
+
+    # Compute skill_flags per version
+    skill_flags_per_version = {}
+    for label, resps in responses_per_version.items():
+        skill_flags_per_version[label] = detect_skill_flags(resps, targets)
+    # Latest for backward compat
+    skill_flags = list(skill_flags_per_version.values())[-1]
 
     # Build skill data per version
     all_versions = {}
@@ -589,10 +775,20 @@ def main():
         all_versions[label] = build_skill_data(scores)
         all_summaries[label] = compute_summary(scores)
 
+    # Compute activation metrics per version
+    activation_metrics_per_version = {}
+    for label, scores in score_versions.items():
+        flags = skill_flags_per_version.get(label, skill_flags)
+        activation_metrics_per_version[label] = compute_activation_metrics(flags, scores, targets)
+    activation_metrics = list(activation_metrics_per_version.values())[-1]
+
     embedded = json.dumps({"versions": all_versions, "summaries": all_summaries,
                            "prompts": prompts, "responses": responses,
                            "skill_content": skill_content,
                            "skill_flags": skill_flags,
+                           "skill_flags_per_version": skill_flags_per_version,
+                           "activation_metrics": activation_metrics,
+                           "activation_metrics_per_version": activation_metrics_per_version,
                            "version_labels": list(score_versions.keys())},
                           ensure_ascii=False)
 

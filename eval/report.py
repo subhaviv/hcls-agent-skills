@@ -140,8 +140,10 @@ def generate_report(scores: list[dict], results_dir: Path, judge_model: str, ver
                 continue
             resp_data = json.loads(resp_file.read_text())
             text = resp_data.get("text", "")
-            # Detect loaded skills
-            loaded = set(re.findall(r'/skills/([a-z0-9-]+)/SKILL\.md', text))
+            # Check activated_skills key first (Strands backend)
+            loaded = set(resp_data.get("activated_skills", []))
+            # Also detect from response text (kiro-cli backend)
+            loaded.update(re.findall(r'/skills/([a-z0-9-]+)/SKILL\.md', text))
             preamble = text[:1000]
             for m in re.findall(r'(?:skill|read|load|check).*?([a-z]+-[a-z]+(?:-[a-z]+)*)', preamble, re.IGNORECASE):
                 if (Path("skills") / m).is_dir():
@@ -266,44 +268,16 @@ def generate_report(scores: list[dict], results_dir: Path, judge_model: str, ver
     md.append(f"| **Overall** | **{overall_cohens_d:+.2f}** | **{_interpret_d(overall_cohens_d)}** | **{overall_delta:+.1f}** |")
     md.append("")
 
-    # Per-Skill Results — include v3 comparison if available
-    v3_path_psk = results_dir / "scores_v3.json"
-    v3_skill_wr = {}
-    if v3_path_psk.exists():
-        _v3s = json.loads(v3_path_psk.read_text())
-        _v3v = [s for s in _v3s if sum(s["baseline"].values()) > 0 and sum(s["skills"].values()) > 0]
-        _v3sw = {}
-        for s in _v3v:
-            sk_name = _skill_from_id(s["id"])
-            _v3sw.setdefault(sk_name, {"wins": 0, "n": 0})
-            _v3sw[sk_name]["n"] += 1
-            if s.get("winner") == "skills":
-                _v3sw[sk_name]["wins"] += 1
-        v3_skill_wr = {k: round(v["wins"]/v["n"]*100, 1) if v["n"] > 0 else 0 for k, v in _v3sw.items()}
-
-    if v3_skill_wr:
-        md.append("## Per-Skill Results (sorted by v3\u2192v4 change)\n")
-        md.append("| Skill | Domain | N | v3 WR | v4 WR | Change | Cohen's d | Delta |")
-        md.append("|---|---|---|---|---|---|---|---|")
-        def _wr_change(s):
-            return skill_win_rates.get(s, 0) - v3_skill_wr.get(s, skill_win_rates.get(s, 0))
-        for skill in sorted(per_skill, key=_wr_change):
-            sk = per_skill[skill]
-            wr = skill_win_rates.get(skill, 0)
-            cd = skill_cohens.get(skill, 0)
-            v3wr = v3_skill_wr.get(skill, 0)
-            change = wr - v3wr
-            flag = " \u26a0\ufe0f" if change <= -20 else (" \u2705" if change >= 20 else "")
-            md.append(f"| {skill} | {sk['domain']} | {sk['n']} | {v3wr:.0f}% | {wr:.0f}% | {change:+.0f}%{flag} | {cd:+.2f} | {sk['mean_delta']:+.1f} |")
-    else:
-        md.append("## Per-Skill Results\n")
-        md.append("| Skill | Domain | N | Win Rate | Cohen's d | Delta |")
-        md.append("|---|---|---|---|---|---|")
-        for skill in sorted(per_skill, key=lambda s: skill_win_rates.get(s, 0), reverse=True):
-            sk = per_skill[skill]
-            wr = skill_win_rates.get(skill, 0)
-            cd = skill_cohens.get(skill, 0)
-            md.append(f"| {skill} | {sk['domain']} | {sk['n']} | {wr:.1f}% | {cd:+.2f} | {sk['mean_delta']:+.1f} |")
+    # Per-Skill Results — simple table sorted by win rate
+    md.append("## Per-Skill Results\n")
+    md.append("| Skill | Domain | N | Activated | Win Rate | Cohen's d | Delta |")
+    md.append("|---|---|---|---|---|---|---|")
+    for skill in sorted(per_skill, key=lambda s: skill_win_rates.get(s, 0), reverse=True):
+        sk = per_skill[skill]
+        wr = skill_win_rates.get(skill, 0)
+        cd = skill_cohens.get(skill, 0)
+        n_act = sum(1 for p in skill_prompts[skill] if p["id"] in activated_prompts)
+        md.append(f"| {skill} | {sk['domain']} | {sk['n']} | {n_act}/{sk['n']} | {wr:.0f}% | {cd:+.2f} | {sk['mean_delta']:+.1f} |")
     md.append("")
 
     # Regressions
@@ -335,6 +309,66 @@ def generate_report(scores: list[dict], results_dir: Path, judge_model: str, ver
             act_diffs = [sum(p["skills"][d] - p["baseline"][d] for d in DIMENSIONS) / len(DIMENSIONS) for p in active_prompts]
             act_cd = _cohens_d_paired(act_diffs)
             md.append(f"| {skill} | {sk['domain']} | {sk['n']} | {act_wr:.1f}% | {act_cd:+.2f} | {sk['mean_delta']:+.1f} |")
+        md.append("")
+
+    # Activation Confusion Matrix (win rate by activation pattern)
+    patterns = {"clean": [], "intended_plus_same": [], "intended_plus_cross": [], "only_unintended": [], "no_skill": []}
+    if responses_dir and responses_dir.exists():
+        for p in per_prompt:
+            pid = p["id"]
+            resp_file = responses_dir / f"{pid}_skills.json"
+            if not resp_file.exists():
+                patterns["no_skill"].append(pid)
+                continue
+            resp_data = json.loads(resp_file.read_text())
+            text = resp_data.get("text", "")
+            loaded = set(resp_data.get("activated_skills", []))
+            loaded.update(re.findall(r'/skills/([a-z0-9-]+)/SKILL\.md', text))
+            target = set(p.get("target_skills", []))
+            if not loaded:
+                patterns["no_skill"].append(pid)
+            elif not (target & loaded):
+                patterns["only_unintended"].append(pid)
+            elif loaded - target:
+                # Has both intended and extra
+                extra_domains = set()
+                for s in (loaded - target):
+                    if (Path("skills") / s).is_dir():
+                        extra_domains.add("same")  # simplified
+                patterns["intended_plus_same"].append(pid)
+            else:
+                patterns["clean"].append(pid)
+
+        def _winner_from_scores(s):
+            w = s.get("winner", "")
+            if w in ("skills", "baseline", "tie"):
+                return w
+            s_sum = sum(s["skills"][d] for d in DIMENSIONS)
+            b_sum = sum(s["baseline"][d] for d in DIMENSIONS)
+            return "skills" if s_sum > b_sum else ("baseline" if b_sum > s_sum else "tie")
+
+        winners = {s["id"]: _winner_from_scores(s) for s in scores}
+        md.append("## Skill Activation Confusion Matrix\n")
+        md.append("| Pattern | Count | Win Rate | Wins | Losses | Ties |")
+        md.append("|---|---|---|---|---|---|")
+        pattern_labels = {
+            "clean": "Only intended skill(s)",
+            "intended_plus_same": "Intended + extra skills",
+            "intended_plus_cross": "Intended + cross-domain extra",
+            "only_unintended": "Only unintended skill(s)",
+            "no_skill": "No skill loaded",
+        }
+        for key, label in pattern_labels.items():
+            pids = patterns[key]
+            count = len(pids)
+            if count == 0:
+                md.append(f"| {label} | 0 | — | 0 | 0 | 0 |")
+                continue
+            wins = sum(1 for pid in pids if winners.get(pid) == "skills")
+            losses = sum(1 for pid in pids if winners.get(pid) == "baseline")
+            ties = count - wins - losses
+            wr = round(wins / count * 100, 1)
+            md.append(f"| {label} | {count} | {wr}% | {wins} | {losses} | {ties} |")
         md.append("")
 
     # Per-skill detailed breakdown
@@ -378,60 +412,6 @@ def generate_report(scores: list[dict], results_dir: Path, judge_model: str, ver
     for s, sk in bottom:
         md.append(f"- **{s}** ({sk['domain']}): win rate = {skill_win_rates.get(s, 0):.1f}%, Cohen's d = {skill_cohens.get(s, 0):+.2f}, delta = {sk['mean_delta']:+.1f}")
     md.append("")
-
-    # v3 Comparison section
-    v3_path = results_dir / "scores_v3.json"
-    if v3_path.exists():
-        v3_scores = json.loads(v3_path.read_text())
-        # Filter valid v3 scores
-        v3_valid = [s for s in v3_scores if sum(s["baseline"].values()) > 0 and sum(s["skills"].values()) > 0]
-        v3_per_prompt = []
-        for s in v3_valid:
-            v3_per_prompt.append({
-                "id": s["id"],
-                "baseline": {d: s["baseline"].get(d, 0) for d in DIMENSIONS},
-                "skills": {d: s["skills"].get(d, 0) for d in DIMENSIONS},
-            })
-        v3_wins = [1 if sum(p["skills"][d] for d in DIMENSIONS) > sum(p["baseline"][d] for d in DIMENSIONS) else (0 if sum(p["skills"][d] for d in DIMENSIONS) < sum(p["baseline"][d] for d in DIMENSIONS) else 0.5) for p in v3_per_prompt]
-        v3_win_rate = round(_mean(v3_wins) * 100, 1) if v3_wins else 0
-        v3_diffs = [sum(p["skills"][d] - p["baseline"][d] for d in DIMENSIONS) / len(DIMENSIONS) for p in v3_per_prompt]
-        v3_cd = _cohens_d_paired(v3_diffs)
-        v3_delta = round(_mean(v3_diffs), 1) if v3_diffs else 0
-
-        md.append("## v3 → v4 Comparison\n")
-        md.append("| Metric | v3 | v4 | Change |")
-        md.append("|---|---|---|---|")
-        md.append(f"| Win Rate | {v3_win_rate:.1f}% | {overall_win_rate:.1f}% | {overall_win_rate - v3_win_rate:+.1f}% |")
-        md.append(f"| Cohen's d | {v3_cd:+.2f} | {overall_cohens_d:+.2f} | {overall_cohens_d - v3_cd:+.2f} |")
-        md.append(f"| Delta | {v3_delta:+.1f} | {overall_delta:+.1f} | {overall_delta - v3_delta:+.1f} |")
-        md.append(f"| N (valid) | {len(v3_valid)} | {len(valid_scores)} | {len(valid_scores) - len(v3_valid):+d} |")
-        md.append("")
-
-        # Updated skills comparison
-        updated_skills = ["proteomics-analysis", "quantitative-proteomics", "cdisc-compliance",
-                          "edc-data-validation", "scrna-seq-pipeline", "trajectory-analysis"]
-        # Build v3 per-skill win rates
-        v3_skill_prompts = defaultdict(list)
-        for p in v3_per_prompt:
-            v3_skill_prompts[_skill_from_id(p["id"])].append(p)
-
-        md.append("### Updated Skills (v3 → v4)\n")
-        md.append("| Skill | v3 Win Rate | v4 Win Rate | Change | v3 Delta | v4 Delta |")
-        md.append("|---|---|---|---|---|---|")
-        for skill in updated_skills:
-            v3_sp = v3_skill_prompts.get(skill, [])
-            v4_sp = skill_prompts.get(skill, [])
-            if v3_sp:
-                v3_sw = [1 if sum(p["skills"][d] for d in DIMENSIONS) > sum(p["baseline"][d] for d in DIMENSIONS) else (0 if sum(p["skills"][d] for d in DIMENSIONS) < sum(p["baseline"][d] for d in DIMENSIONS) else 0.5) for p in v3_sp]
-                v3_swr = round(_mean(v3_sw) * 100, 1)
-                v3_sd = round(_mean([sum(p["skills"][d] - p["baseline"][d] for d in DIMENSIONS) / len(DIMENSIONS) for p in v3_sp]), 1)
-            else:
-                v3_swr = 0
-                v3_sd = 0
-            v4_swr = skill_win_rates.get(skill, 0)
-            v4_sd = per_skill[skill]["mean_delta"] if skill in per_skill else 0
-            md.append(f"| {skill} | {v3_swr:.1f}% | {v4_swr:.1f}% | {v4_swr - v3_swr:+.1f}% | {v3_sd:+.1f} | {v4_sd:+.1f} |")
-        md.append("")
 
     # Dropped prompts summary
     if dropped:

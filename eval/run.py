@@ -41,11 +41,35 @@ def main():
     parser.add_argument("--config", type=Path, default=Path("eval/config.yaml"))
     parser.add_argument("--version", type=str, default=None, help="Version label (e.g., v2). Saves scores as scores_<version>.json")
     parser.add_argument("--pairwise", action="store_true", help="Use pairwise judge (both responses in one call, randomized position)")
+    parser.add_argument("--backend", type=str, default="strands", choices=["strands", "kiro-cli"],
+                        help="Execution backend: 'strands' (default, uses Bedrock directly) or 'kiro-cli' (requires kiro subscription)")
+    parser.add_argument("--skills", type=str, default=None,
+                        help="Path to skills directory (default: ./skills/)")
+    parser.add_argument("--model", type=str, default=None,
+                        help="Bedrock model ID for execution (strands backend only)")
+    parser.add_argument("--tools", type=str, nargs="*", default=None,
+                        help="Extra tools for both conditions (e.g., --tools think). Strands backend only.")
+    parser.add_argument("--kiro-model", type=str, default=None,
+                        help="Pin kiro-cli model (e.g., claude-sonnet-4.5). kiro-cli backend only.")
     args = parser.parse_args()
 
     cfg = yaml.safe_load(args.config.read_text())
     prompts = load_prompts(args.prompts_dir)
     print(f"Loaded {len(prompts)} prompts")
+
+    # Override config with CLI args
+    if args.skills:
+        import eval.execute as _ex
+        _ex.DEFAULT_SKILLS_PATH = args.skills
+    if args.model:
+        import eval.execute as _ex
+        _ex.DEFAULT_MODEL_ID = args.model
+    if args.tools:
+        import eval.execute as _ex
+        _ex.EXTRA_TOOLS = args.tools
+    if args.kiro_model:
+        import eval.execute as _ex
+        _ex.DEFAULT_KIRO_MODEL = args.kiro_model
 
     responses_dir = args.results_dir / "responses" / args.version if args.version else args.results_dir / "responses"
     responses_dir.mkdir(parents=True, exist_ok=True)
@@ -58,6 +82,7 @@ def main():
             parallel=args.parallel,
             timeout=cfg["execution"]["timeout_seconds"],
             kiro_cmd=cfg["execution"]["kiro_cmd"],
+            backend=args.backend,
         ))
         print(f"Responses cached in {responses_dir}")
 
@@ -147,7 +172,7 @@ def main():
     # Step 3: Report
     print("\n=== Generating report ===")
     version_suffix = f"_{args.version}" if args.version else ""
-    report = generate_report(scored, args.results_dir, cfg["judge"]["model"], version=args.version)
+    report = generate_report(scored, args.results_dir, cfg["judge"]["model"], version=args.version, responses_dir=responses_dir)
     overall = report["summary"]["overall_delta"]
     print(f"Overall delta: {overall:+.1f}")
     print(f"Report: {args.results_dir / f'report{version_suffix}.md'}")
