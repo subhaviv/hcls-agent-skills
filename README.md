@@ -201,7 +201,6 @@ The coordinator routes queries to 8 domain specialists:
 | hcls-healthcare-ops | Claims billing, risk adjustment, prior auth, HEDIS |
 | hcls-ai-infra | ML experiment design, AWS architecture |
 
-See [`docs/multiagent-architecture.md`](./docs/multiagent-architecture.md) for the full architecture.
 
 ### Amazon Quick
 
