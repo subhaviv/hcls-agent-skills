@@ -2,7 +2,7 @@
 """Repo-wide property validation for HCLS Skills Expansion spec.
 
 Covers Properties 1, 2, 3, 8, 9, 11 from the design document.
-Run from the repo root: python tests/validate_properties.py
+Run from the repo root: python tests/validate_skill.py
 """
 
 import json
@@ -16,7 +16,7 @@ AGENTS_DIR = REPO_ROOT / "agents"
 
 EXCLUDED_FILES = {
     "IMPLEMENTATION-GAPS.md",
-    "validate_properties.py",
+    "validate_skill.py",
 }
 EXCLUDED_DIRS = {".git", ".kiro", "node_modules", "__pycache__", "tests", "results"}
 
@@ -201,6 +201,132 @@ def check_property_11():
 
 
 # -------------------------------------------------------------------------
+# Property 12: Line count ≤ 500
+# -------------------------------------------------------------------------
+def check_property_12():
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        skill_md = entry / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        line_count = len(skill_md.read_text().splitlines())
+        if line_count > 500:
+            error("P12", f"{entry.name}/SKILL.md has {line_count} lines (max 500)")
+
+
+# -------------------------------------------------------------------------
+# Property 13: Response Format section present
+# -------------------------------------------------------------------------
+def check_property_13():
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        skill_md = entry / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        content = skill_md.read_text()
+        if not re.search(r"^## Response (Format|Structure)", content, re.MULTILINE):
+            error("P13", f"{entry.name}/SKILL.md missing '## Response Format' or '## Response Structure' section")
+
+
+# -------------------------------------------------------------------------
+# Property 14: Category tag present
+# -------------------------------------------------------------------------
+def check_property_14():
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        skill_md = entry / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        content = skill_md.read_text()
+        if "category:reasoning" not in content and "category:pipeline" not in content:
+            error("P14", f"{entry.name}/SKILL.md missing category tag (category:reasoning or category:pipeline)")
+
+
+# -------------------------------------------------------------------------
+# Property 15: Trigger keywords ≥ 12
+# -------------------------------------------------------------------------
+def check_property_15():
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        skill_md = entry / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        content = skill_md.read_text()
+        # Extract description from frontmatter
+        parts = content.split("---", 2)
+        if len(parts) < 3:
+            continue
+        fm_text = parts[1]
+        # Find description line(s) and look for Triggers include section
+        desc = ""
+        for line in fm_text.split("\n"):
+            if line.startswith("description:"):
+                desc = line.split(":", 1)[1].strip()
+                break
+        # Count quoted trigger keywords
+        triggers = re.findall(r'"([^"]+)"', desc)
+        if len(triggers) < 12:
+            error("P15", f"{entry.name}/SKILL.md has {len(triggers)} trigger keywords (min 12)")
+
+
+# -------------------------------------------------------------------------
+# Property 16: Required sections by category
+# -------------------------------------------------------------------------
+def check_property_16():
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        skill_md = entry / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        content = skill_md.read_text()
+        if "category:reasoning" in content:
+            # Reasoning skills need decision trees (├─/└─) or numbered procedures (≥10 numbered steps)
+            has_tree = "├─" in content or "└─" in content
+            numbered_steps = re.findall(r"^\d+\.", content, re.MULTILINE)
+            if not has_tree and len(numbered_steps) < 10:
+                error("P16", f"{entry.name}/SKILL.md (reasoning) lacks decision trees or ≥10 numbered steps")
+        elif "category:pipeline" in content:
+            # Pipeline skills need code blocks
+            code_blocks = re.findall(r"^```", content, re.MULTILINE)
+            if len(code_blocks) < 2:  # at least 1 complete code block (open + close)
+                error("P16", f"{entry.name}/SKILL.md (pipeline) has fewer than 1 code block")
+
+
+# -------------------------------------------------------------------------
+# Property 17: Do-not-narrate instruction for reasoning skills with decision trees
+# -------------------------------------------------------------------------
+def check_property_17():
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        skill_md = entry / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        content = skill_md.read_text()
+        # Only applies to reasoning skills with decision trees
+        if "category:reasoning" not in content:
+            continue
+        if "├─" not in content and "└─" not in content:
+            continue
+        # Extract Response Format/Structure section content
+        match = re.search(
+            r"^## Response (Format|Structure)\s*\n(.*?)(?=^## |\Z)",
+            content, re.MULTILINE | re.DOTALL
+        )
+        if not match:
+            error("P17", f"{entry.name}/SKILL.md (reasoning with decision trees) missing Response Format section")
+            continue
+        section = match.group(2).lower()
+        if "do not narrate" not in section and "internal reasoning" not in section:
+            error("P17", f"{entry.name}/SKILL.md (reasoning with decision trees) Response Format missing 'do not narrate' or 'internal reasoning' instruction")
+
+
+# -------------------------------------------------------------------------
 # Helpers
 # -------------------------------------------------------------------------
 def _iter_repo_files():
@@ -227,6 +353,12 @@ def main():
         ("Property 8: Agent bundle validity", check_property_8),
         ("Property 9: No hardcoded paths / inclusive language", check_property_9),
         ("Property 11: Script safety", check_property_11),
+        ("Property 12: Line count ≤ 500", check_property_12),
+        ("Property 13: Response Format section", check_property_13),
+        ("Property 14: Category tag present", check_property_14),
+        ("Property 15: Trigger keywords ≥ 12", check_property_15),
+        ("Property 16: Category-specific content", check_property_16),
+        ("Property 17: Do-not-narrate instruction", check_property_17),
     ]
 
     for name, fn in checks:
