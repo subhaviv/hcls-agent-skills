@@ -148,6 +148,35 @@ Load a single skill in Kiro CLI and test it against representative prompts:
 - Is the response well-structured (not a wall of text)?
 - Does it cite specific thresholds/rules you added?
 
+## Validate Your Changes
+
+Beyond manual testing, you can measure whether your modifications actually improve agent responses using the automated evaluation suite. The eval runs a pairwise comparison: the same prompts answered with and without your skill, judged by Claude Opus on scientific accuracy, critical thinking, and coherence.
+
+**Run a single-skill evaluation:**
+
+```bash
+python -m eval.run --skill <skill-name> --parallel 2 --version v9 --pairwise
+python eval/build_review.py
+open eval/results/review.html
+```
+
+A single-skill run takes ~15–20 minutes and costs ~$1–2 in Bedrock inference. The review report shows win/loss rates and per-dimension scores so you can confirm your edits help rather than hurt.
+
+**What "good" looks like:**
+- Win rate ≥ 70% (your skill beats no-skill on most prompts)
+- Critical thinking positive (the skill improves reasoning, not just verbosity)
+- Coherence neutral or positive (no regression from added content)
+
+**Quick structural check (no AWS credentials needed):**
+
+```bash
+python tests/validate_skill.py
+```
+
+This validates frontmatter, line count ≤500, required sections, trigger keyword count ≥12, and category-specific content (decision trees for reasoning skills, code blocks for pipeline skills).
+
+See [`eval/README.md`](./eval/README.md) for full documentation on the evaluation suite, custom prompt sets, and interpreting results.
+
 ## Skill Checklist
 
 Before committing your skill, verify:

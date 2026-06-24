@@ -15,6 +15,41 @@ from subprocess import DEVNULL, PIPE
 
 logger = logging.getLogger(__name__)
 
+# ─── Fail-fast counter for auth/throttle errors ──────────────────────────────
+
+_AUTH_THROTTLE_CODES = {"ExpiredTokenException", "UnrecognizedClientException",
+                        "InvalidSignatureException", "AccessDeniedException",
+                        "ThrottlingException", "TooManyRequestsException"}
+_MAX_CONSECUTIVE_FAILURES = 3
+_consecutive_auth_errors = 0
+
+
+class EvalAbortError(Exception):
+    """Raised when too many consecutive auth/throttle errors occur."""
+
+
+def _check_fail_fast(error: Exception) -> None:
+    """Increment counter on auth/throttle errors; abort after threshold."""
+    global _consecutive_auth_errors
+    error_code = getattr(error, "response", {}).get("Error", {}).get("Code", "")
+    error_name = type(error).__name__
+    if error_code in _AUTH_THROTTLE_CODES or error_name in _AUTH_THROTTLE_CODES:
+        _consecutive_auth_errors += 1
+        if _consecutive_auth_errors >= _MAX_CONSECUTIVE_FAILURES:
+            raise EvalAbortError(
+                f"Aborting: {_consecutive_auth_errors} consecutive auth/throttle errors. "
+                f"Last error: {error}"
+            ) from error
+    else:
+        _consecutive_auth_errors = 0
+
+
+def _reset_fail_fast() -> None:
+    """Reset counter on successful execution."""
+    global _consecutive_auth_errors
+    _consecutive_auth_errors = 0
+
+
 DEFAULT_MODEL_ID = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 DEFAULT_SKILLS_PATH = "./skills/"
 DEFAULT_BACKEND = "strands"
@@ -118,11 +153,15 @@ async def _execute_strands(
         agent = _strands_build_agent(condition, model_id)
         future = loop.run_in_executor(_STRANDS_EXECUTOR, _strands_invoke, agent, prompt_text)
         response = await asyncio.wait_for(future, timeout=timeout)
+        _reset_fail_fast()
         return response
     except asyncio.TimeoutError:
         logger.warning(f"Timeout for {prompt_id} ({condition})")
         return {"text": "[TIMEOUT]", "activated_skills": []}
+    except EvalAbortError:
+        raise
     except Exception as e:
+        _check_fail_fast(e)
         logger.error(f"Error for {prompt_id} ({condition}): {e}")
         return {"text": f"[ERROR] {type(e).__name__}: {e}", "activated_skills": []}
 

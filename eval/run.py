@@ -13,11 +13,15 @@ try:
     from .judge import get_bedrock_client, score_response, DIMENSIONS
     from .judge_pairwise import score_pairwise
     from .report import generate_report
+    from .preflight import validate_credentials, PreflightError
+    from .execute import EvalAbortError
 except ImportError:
     from execute import run_all, ensure_eval_agent
     from judge import get_bedrock_client, score_response, DIMENSIONS
     from judge_pairwise import score_pairwise
     from report import generate_report
+    from preflight import validate_credentials, PreflightError
+    from execute import EvalAbortError
 
 
 def load_prompts(prompts_dir: Path) -> list[dict]:
@@ -57,6 +61,15 @@ def main():
     prompts = load_prompts(args.prompts_dir)
     print(f"Loaded {len(prompts)} prompts")
 
+    # Pre-flight: validate credentials before spending time on execution
+    if not args.skip_execution:
+        print("\n=== Pre-flight credential check ===")
+        try:
+            validate_credentials(model_id=args.model)
+        except PreflightError as e:
+            print(f"\n✗ Pre-flight failed:\n{e}", file=sys.stderr)
+            sys.exit(1)
+
     # Override config with CLI args
     if args.skills:
         import eval.execute as _ex
@@ -77,13 +90,17 @@ def main():
     # Step 1: Execute
     if not args.skip_execution:
         print("\n=== Executing prompts ===")
-        asyncio.run(run_all(
-            prompts, responses_dir,
-            parallel=args.parallel,
-            timeout=cfg["execution"]["timeout_seconds"],
-            kiro_cmd=cfg["execution"]["kiro_cmd"],
-            backend=args.backend,
-        ))
+        try:
+            asyncio.run(run_all(
+                prompts, responses_dir,
+                parallel=args.parallel,
+                timeout=cfg["execution"]["timeout_seconds"],
+                kiro_cmd=cfg["execution"]["kiro_cmd"],
+                backend=args.backend,
+            ))
+        except EvalAbortError as e:
+            print(f"\n✗ {e}", file=sys.stderr)
+            sys.exit(1)
         print(f"Responses cached in {responses_dir}")
 
     # Step 2: Judge

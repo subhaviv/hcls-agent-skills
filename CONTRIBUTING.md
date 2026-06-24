@@ -44,8 +44,9 @@ If a skill mixes both, split it or pick the dominant category.
 1. Fork the repo.
 2. Branch: `git checkout -b skill/<skill-name>` or `fix/<short-desc>`.
 3. Author and locally test your skill with representative prompts in Kiro.
-4. Run through the [Quality Checklist](./QUALITY_CHECKLIST.md).
-5. Open a merge request describing the skill, category, and example prompts used for testing.
+4. Run `python tests/validate_skill.py` to check structural requirements.
+5. Run through the [Quality Checklist](./QUALITY_CHECKLIST.md).
+6. Open a merge request describing the skill, category, and example prompts used for testing.
 
 ## Code of Conduct
 

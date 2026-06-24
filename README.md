@@ -213,11 +213,33 @@ Amazon Quick loads skills via GUI upload of individual `SKILL.md` files:
 
 Upload path: **Settings → Capabilities → Skills → Upload** → select a `SKILL.md` file. Start with one domain and add more as needed. Follow the instructions in [Skills and agents](https://docs.aws.amazon.com/quick/latest/userguide/skills-and-agents-desktop.html) in the Amazon Quick documentation.
 
+### AWS Strands Agents SDK
+
+For the AWS Strands Agents SDK, load skills directly in your Python code:
+
+```python
+from strands import Agent
+from strands.skills import AgentSkills
+
+agent = Agent(
+    model="us.anthropic.claude-sonnet-4-20250514",
+    skills=AgentSkills(skills="./hcls-agent-skills/skills/"),
+)
+```
+
+Skills integrate natively with [Strands Agents SDK](https://strandsagents.com/) — no wrappers or adapters needed. The `AgentSkills` plugin discovers and loads all skills from the specified directory. Skills activate automatically based on query content.
+
+### Amazon AgentCore
+
+Once your skill-equipped agent works locally, you can move it to production. Amazon Bedrock AgentCore provides an alternative path to inject skills into hosted agents. In addition to embedding them in the Strands agent code, you can configure skills at the environment level so they're available to any agent running in that harness.
+
+Alternatively you can load skills to AgentCore harness, by following [Skills](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness-skills.html) in the AgentCore documentation. AgentCore harness provides managed hosting, Auto Scaling, security boundaries, and observability capabilities without managing infrastructure.
+
 ### Claude Code
 
 ```bash
 # Install into your project (symlinks to repo, so updates propagate)
-./install.sh --target claude-code --project-dir /path/to/your/project
+npx skills add awslabs/hcls-agent-skills -a claude-code
 ```
 
 Skills auto-activate when Claude Code detects relevant topics in your prompts. No agent config needed — Claude Code discovers skills from `.claude/skills/` automatically.

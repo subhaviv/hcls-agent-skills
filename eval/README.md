@@ -16,12 +16,24 @@ python eval/build_review.py
 open eval/results/review.html
 ```
 
+> ⚠️ **Cost & Time Estimate**
+>
+> A full eval run (410 prompts × 2 conditions + 410 pairwise judgments) costs **~$126** on-demand in us-east-1:
+>
+> | Phase | Model | Estimated Cost |
+> |-------|-------|---------------|
+> | Execution (820 calls) | Claude Sonnet 4.6 — $3/1M input, $15/1M output | ~$60 |
+> | Judging (410 calls) | Claude Opus 4.7 — $15/1M input, $75/1M output | ~$66 |
+> | **Total** | | **~$126** |
+>
+> Wall time: ~4 hours at `--parallel 2`. Costs vary with prompt complexity and response length.
+
 ## Prerequisites
 
 - **Python 3.12+** managed via [uv](https://docs.astral.sh/uv/)
 - **AWS credentials:** configured via `~/.aws/credentials` or environment variables
 - **Amazon Bedrock access:** model access enabled for:
-  - `us.anthropic.claude-sonnet-4-5-20250929-v1:0` (execution, default)
+  - `us.anthropic.claude-sonnet-4-6` (execution, default)
   - `us.anthropic.claude-opus-4-7` (LLM judge)
 - **Region:** `us-east-1` (default Bedrock region)
 
