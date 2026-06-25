@@ -719,7 +719,7 @@ def compute_activation_metrics(skill_flags: dict, scores: list, targets: dict) -
 
 def main():
     parser = argparse.ArgumentParser(description="Build HTML review from eval results")
-    parser.add_argument("--eval-dir", type=Path, default=Path(__file__).parent,
+    parser.add_argument("--results-dir", "--eval-dir", type=Path, default=Path(__file__).parent,
                         help="Root eval directory")
     parser.add_argument("--output", type=Path, default=None,
                         help="Output HTML path (default: eval/results/review.html)")
@@ -727,8 +727,8 @@ def main():
                         help="Build for a single version only (e.g., v3)")
     args = parser.parse_args()
 
-    results_dir = args.eval_dir / "results"
-    prompts_dir = args.eval_dir / "prompts"
+    results_dir = args.results_dir / "results"
+    prompts_dir = args.results_dir / "prompts"
     output = args.output or results_dir / (f"review_{args.version}.html" if args.version else "review.html")
 
     # Load score versions

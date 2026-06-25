@@ -6,7 +6,7 @@ Automated evaluation measuring whether domain skills improve agent responses for
 
 ```bash
 uv venv --python 3.12 && source .venv/bin/activate
-uv pip install -e .
+uv pip install -e ".[dev]"
 
 # Recommended: v9 methodology (Strands + Sonnet 4.6 + think tool)
 python -m eval.run --parallel 2 --version v9 --pairwise \

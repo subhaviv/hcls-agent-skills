@@ -26,8 +26,6 @@ Agent skills close this gap. A skill encodes the structured reasoning that exper
 The biggest gains appear exactly where unguided agents fail most: on the hard, multi-step regulatory and methodological questions where getting it wrong has consequences. Outputs become reproducible, not just occasionally correct.
 
 This is what raises the floor for every scientist without lowering the ceiling. Skills don't skip the learning; they provide scaffolding so a new postdoc's analysis meets the same methodological standard as the PI's while they build understanding of *why* each step matters. The work shifts from instructing the agent ("here's how to avoid immortal time bias") to exercising judgment at a higher level ("is a new-user active-comparator design even the right approach?").
-
-
 ## Skill Catalog
 
 <details>
@@ -138,7 +136,6 @@ This is what raises the floor for every scientist without lowering the ceiling. 
 ```bash
 npx skills add awslabs/hcls-agent-skills
 ```
-
 Or clone the repository for full control:
 
 ```bash
@@ -160,7 +157,7 @@ These skills follow the [Agent Skills open standard](https://agentskills.io) (`S
 | **GitHub Copilot, Cursor, Codex, Gemini CLI, 50+ others** | `npx skills add .` | Universal CLI from [vercel-labs/skills](https://github.com/vercel-labs/skills) |
 | **CrewAI** | `skills=["./skills"]` | Native parameter on Agent class |
 | **LangChain / LangGraph** | Documented pattern | Skills as prompt-driven specializations |
-| **AWS Strands SDK** | `AgentSkills(skills="./skills/")` | Built-in plugin, deploys to Lambda/Fargate |
+| **AWS Strands SDK** | `AgentSkills + plugins=[skills]` | Built-in plugin, deploys to AgentCore |
 | **Claude Messages API** | Upload via Skills Management API | First-class `container` parameter with CRUD |
 
 ### Kiro (IDE & CLI)
@@ -217,14 +214,17 @@ Upload path: **Settings → Capabilities → Skills → Upload** → select a `S
 
 For the AWS Strands Agents SDK, load skills directly in your Python code:
 
-```python
-from strands import Agent
-from strands.skills import AgentSkills
+```bash
+pip install strands-agents
+```
 
-agent = Agent(
-    model="us.anthropic.claude-sonnet-4-20250514",
-    skills=AgentSkills(skills="./hcls-agent-skills/skills/"),
-)
+```python
+from strands import Agent, AgentSkills
+from strands.models.bedrock import BedrockModel
+
+model = BedrockModel(model_id="us.anthropic.claude-sonnet-4-20250514", region_name="us-east-1")
+skills = AgentSkills(skills="./hcls-agent-skills/skills/")
+agent = Agent(model=model, plugins=[skills])
 ```
 
 Skills integrate natively with [Strands Agents SDK](https://strandsagents.com/) — no wrappers or adapters needed. The `AgentSkills` plugin discovers and loads all skills from the specified directory. Skills activate automatically based on query content.

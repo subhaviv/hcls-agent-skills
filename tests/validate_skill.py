@@ -5,6 +5,7 @@ Covers Properties 1, 2, 3, 8, 9, 11 from the design document.
 Run from the repo root: python tests/validate_skill.py
 """
 
+import argparse
 import json
 import re
 import sys
@@ -18,13 +19,24 @@ EXCLUDED_FILES = {
     "IMPLEMENTATION-GAPS.md",
     "validate_skill.py",
 }
-EXCLUDED_DIRS = {".git", ".kiro", "node_modules", "__pycache__", "tests", "results"}
+EXCLUDED_DIRS = {".git", ".kiro", "node_modules", "__pycache__", "tests", "results", ".venv", "dist", "build", ".eggs"}
 
 REQUIRED_FRONTMATTER = ["name", "description", "usage", "version", "tags"]
 
 NON_INCLUSIVE_TERMS = ["whitelist", "blacklist", "master", "slave"]
 
 errors = []
+SKILL_FILTER = None  # Set via --skill flag to validate a single skill
+
+
+def _iter_skill_dirs():
+    """Iterate skill directories, respecting SKILL_FILTER."""
+    for entry in sorted(SKILLS_DIR.iterdir()):
+        if not entry.is_dir():
+            continue
+        if SKILL_FILTER and entry.name != SKILL_FILTER:
+            continue
+        yield entry
 
 
 def error(prop: str, msg: str):
@@ -35,9 +47,7 @@ def error(prop: str, msg: str):
 # Property 1: Skill format uniformity
 # -------------------------------------------------------------------------
 def check_property_1():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             error("P1", f"{entry.name}/ missing SKILL.md")
@@ -106,9 +116,7 @@ def check_property_2():
 # Property 3: Self-containment
 # -------------------------------------------------------------------------
 def check_property_3():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -183,9 +191,7 @@ def check_property_9():
 # Property 11: Script safety
 # -------------------------------------------------------------------------
 def check_property_11():
-    for skill_dir in sorted(SKILLS_DIR.iterdir()):
-        if not skill_dir.is_dir():
-            continue
+    for skill_dir in _iter_skill_dirs():
         scripts_dir = skill_dir / "scripts"
         if not scripts_dir.is_dir():
             continue
@@ -204,9 +210,7 @@ def check_property_11():
 # Property 12: Line count ≤ 500
 # -------------------------------------------------------------------------
 def check_property_12():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -219,9 +223,7 @@ def check_property_12():
 # Property 13: Response Format section present
 # -------------------------------------------------------------------------
 def check_property_13():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -234,9 +236,7 @@ def check_property_13():
 # Property 14: Category tag present
 # -------------------------------------------------------------------------
 def check_property_14():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -249,9 +249,7 @@ def check_property_14():
 # Property 15: Trigger keywords ≥ 12
 # -------------------------------------------------------------------------
 def check_property_15():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -277,9 +275,7 @@ def check_property_15():
 # Property 16: Required sections by category
 # -------------------------------------------------------------------------
 def check_property_16():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -301,9 +297,7 @@ def check_property_16():
 # Property 17: Do-not-narrate instruction for reasoning skills with decision trees
 # -------------------------------------------------------------------------
 def check_property_17():
-    for entry in sorted(SKILLS_DIR.iterdir()):
-        if not entry.is_dir():
-            continue
+    for entry in _iter_skill_dirs():
         skill_md = entry / "SKILL.md"
         if not skill_md.exists():
             continue
@@ -344,7 +338,22 @@ def _iter_repo_files():
 # Main
 # -------------------------------------------------------------------------
 def main():
-    print("Running property validations...\n")
+    global SKILL_FILTER
+
+    parser = argparse.ArgumentParser(description="Validate HCLS skill properties")
+    parser.add_argument("--skill", type=str, default=None,
+                        help="Validate a single skill by name (e.g., genomic-variant-interpretation)")
+    args = parser.parse_args()
+
+    if args.skill:
+        skill_path = SKILLS_DIR / args.skill
+        if not skill_path.is_dir():
+            print(f"ERROR: Skill '{args.skill}' not found in {SKILLS_DIR}")
+            sys.exit(1)
+        SKILL_FILTER = args.skill
+        print(f"Running property validations for skill: {args.skill}\n")
+    else:
+        print("Running property validations...\n")
 
     checks = [
         ("Property 1: Skill format uniformity", check_property_1),
