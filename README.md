@@ -284,3 +284,7 @@ New skills and improvements are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md
 ## License
 
 [MIT-0](./LICENSE)
+
+## Disclaimer
+
+This solution is for demonstrative purposes only. It is not for clinical use and is not a substitute for professional medical advice, diagnosis, or treatment. The associated skills, and source code are not intended for production. It is each customers' responsibility to determine whether they are subject to HIPAA, and if so, how best to comply with HIPAA and its implementing regulations. Before using AWS in connection with protected health information, customers must enter an AWS Business Associate Addendum (BAA) and follow its configuration requirements.
