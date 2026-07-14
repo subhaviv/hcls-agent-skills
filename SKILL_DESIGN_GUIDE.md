@@ -309,6 +309,7 @@ name: skill-name
 description: >
   [1-2 sentences: what it does]. Use when [specific triggers with domain jargon].
   Triggers include "term1", "term2", "term3", ... [15+ terms]
+usage: Invoke when [one-line instruction for when to use this skill].
 version: 1.0.0
 tags:
   - skill
@@ -449,7 +450,7 @@ Based on the audit, specific recommendations for bottom-tier skills:
 
 ## Sources
 
-- [Eval Technical Report (v3)](./eval/TECHNICAL_REPORT.md) — 410-prompt pairwise evaluation, 41 skills scored
+- [Eval Technical Report](./eval/TECHNICAL_REPORT.md) — 410-prompt pairwise evaluation, 41 skills scored
 - [Full 38-Skill Structural Audit](./.agents/scratchpad/full-38-skill-audit.md) — per-skill metrics
 - [Per-Skill Performance Data](./.agents/scratchpad/eval-per-skill-complete.md) — complete scoring table
 - [Agent Skills Standard](https://agentskills.io) — open specification

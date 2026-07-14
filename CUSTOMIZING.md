@@ -63,7 +63,8 @@ description: >                                              # 2-3 sentences, inc
   Reasoning skill for pharmacovigilance signal detection and evaluation. Use when the user
   asks about disproportionality analysis, PRR, ROR, EBGM, FAERS signal detection, safety
   signal prioritization, or MedDRA-based case series review. Triggers include "safety signal",
-  "PRR", "ROR", "EBGM", "disproportionality", "FAERS", "pharmacovigilance", "signal detection".
+  "PRR", "ROR", "EBGM", "disproportionality", "FAERS", "pharmacovigilance", "signal detection",
+  "case series", "spontaneous report", "signal evaluation", "adverse event signal".
 usage: Invoke when reasoning about drug safety signal detection, evaluation, or prioritization.
 version: 1.0.0                                             # semver
 tags: [skill, category:reasoning, pharmacovigilance, hcls] # always include "skill" and category
@@ -182,7 +183,7 @@ See [`eval/README.md`](./eval/README.md) for full documentation on the evaluatio
 Before committing your skill, verify:
 
 - [ ] **Frontmatter complete** — all 5 required fields present and valid
-- [ ] **Triggers specific** — description includes 5+ trigger phrases users would actually say
+- [ ] **Triggers specific** — description includes 12+ quoted trigger phrases users would actually say
 - [ ] **Teaches something new** — content the agent would get wrong without help
 - [ ] **Has decision procedures** — numbered steps with branch points, not just facts
 - [ ] **Includes thresholds** — specific numbers, not vague guidance ("≥ 6 months" not "adequate duration")
