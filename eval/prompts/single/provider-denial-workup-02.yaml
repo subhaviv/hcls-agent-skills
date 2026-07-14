@@ -1,0 +1,21 @@
+id: provider-denial-workup-02
+prompt: 'We received a CO-197 denial from Cigna for a nuclear stress test (CPT 78452)
+  performed on 2026-06-03. Denial date 2026-06-18, claim CLM-2026-882341, member
+  ID CIG-5541209. Cigna says: "Precertification required per medical policy CARD-019.
+  No authorization on file."
+
+  Our office submitted a prior auth request on 2026-05-29 through Cigna''s provider
+  portal and received confirmation number PA-2026-339041. The cardiologist proceeded
+  with the test on June 3 after no denial was received. Patient is a 64-year-old
+  female with type 2 diabetes, hypertension, and new exertional dyspnea x 2 weeks.
+  EKG showed nonspecific ST changes. Stress test ordered to rule out ischemia before
+  planned elective knee replacement surgery.
+
+  Provider: Dr. Samuel Park MD, Cardiology, NPI 2233445566, Valley Heart Center,
+  500 Medical Way, Nashville TN 37201, (615) 555-0177.
+
+  Draft the appeal.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

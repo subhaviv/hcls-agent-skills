@@ -1,0 +1,22 @@
+id: provider-denial-workup-09
+prompt: 'We have a CO-29 timely filing denial from Medicaid (state of Texas, managed
+  care plan Molina) on a pediatric well-child visit (CPT 99392). DOS 2026-02-10,
+  denial date 2026-06-20, claim CLM-2026-228811, member ID MOL-8821034. Molina
+  requires claims within 95 days of DOS — deadline was May 16. We submitted on
+  June 18, which is 128 days post-DOS.
+
+  The delay happened because the child''s Medicaid eligibility lapsed in January and
+  was retroactively reinstated in June. We could not bill until eligibility was
+  confirmed. We have documentation from HHSC showing the retroactive eligibility
+  reinstatement effective January 1, 2026, issued June 5, 2026.
+
+  Patient: Sofia R. Mendez (minor), DOB 2018-04-12.
+  Provider: Sunshine Pediatrics, NPI 8899001122, 400 Children''s Way, San Antonio
+  TX 78201, (210) 555-0199. Signer: Dr. Angela Torres MD.
+
+  Is there a good-cause argument here given the retroactive eligibility situation?
+  Draft the appeal if so.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

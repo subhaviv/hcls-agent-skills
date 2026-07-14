@@ -1,0 +1,26 @@
+id: provider-denial-workup-07
+prompt: 'We got a CO-50 denial from Anthem on a lumbar spinal cord stimulator trial
+  (CPT 63650) for a 58-year-old male with failed back surgery syndrome. DOS 2026-03-22,
+  denial date 2026-04-05, claim CLM-2026-332019, member ID ANT-4418822. Anthem''s
+  rationale: "Criteria for spinal cord stimulator not met — insufficient documentation
+  of failed conservative therapy."
+
+  The patient had L4-L5 fusion in 2023 with persistent axial and radicular pain.
+  He has tried: PT x 12 weeks post-surgery, epidural steroid injections x 3 (no
+  lasting relief), gabapentin 1800mg/day, duloxetine 60mg/day, and opioid therapy
+  (now tapered). Pain management physician documented VAS 8/10 at rest, functional
+  impairment, and psychological evaluation clearance. The trial was recommended as
+  the next appropriate intervention.
+
+  However, we cannot locate documentation of a formal pain psychology evaluation
+  in the chart — some Anthem policies require this before SCS approval. We are not
+  sure if this was done.
+
+  Provider: Dr. Rachel Kim MD, Pain Management, NPI 6677889900, Advanced Pain
+  Institute, 750 Spine Center Way, Atlanta GA 30301, (404) 555-0211.
+
+  Please assess the appeal posture given the missing psych eval documentation.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

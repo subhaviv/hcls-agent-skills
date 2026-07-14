@@ -1,0 +1,18 @@
+id: provider-denial-workup-01
+prompt: 'Our billing team just got back a denial from Aetna on a lumbar MRI (CPT 72148)
+  for a 52-year-old male with chronic low back pain and new left leg numbness. The
+  denial is CO-50 — not medically necessary. Denial date is 2026-05-15, claim number
+  CLM-2026-441001, member ID AET-2209871, DOS 2026-04-28. Aetna''s rationale: "Advanced
+  imaging not supported — conservative therapy duration insufficient per policy IMG-007."
+
+  Clinical background: Patient has had low back pain for 10 weeks with new onset left
+  L4 dermatomal numbness over the past 3 weeks. Completed 7 weeks of PT (2x/week,
+  Feb 10 – Mar 28, 2026) plus naproxen 500mg BID — no improvement. Ordering physician
+  documented positive left straight-leg raise and concern for L4-L5 disc herniation.
+  MRI ordered to evaluate for surgical candidacy.
+
+  Please run a full denial workup and draft the appeal letter.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

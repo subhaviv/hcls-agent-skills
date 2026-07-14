@@ -1,7 +1,7 @@
 # Agent Skills for Healthcare & Life Sciences
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT--0-yellow.svg)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-38-brightgreen.svg)](./skills/)
+[![Skills](https://img.shields.io/badge/Skills-39-brightgreen.svg)](./skills/)
 [![Domains](https://img.shields.io/badge/Domains-11-blue.svg)](./skills/)
 [![Works with](https://img.shields.io/badge/Works_with-Amazon_Quick_|_Kiro_|_Claude_Code_|_Codex-purple.svg)](#platform-compatibility)
 
@@ -128,6 +128,7 @@ This is what raises the floor for every scientist without lowering the ceiling. 
 | [hedis-measure-specification](./skills/hedis-measure-specification/) | reasoning | HEDIS measure structure, denominator/numerator/exclusion logic, NCQA audit, care gaps |
 | [risk-stratification-indices](./skills/risk-stratification-indices/) | reasoning | LACE, Charlson, Elixhauser indices, SDOH Z-codes, ADI scoring |
 | [quality-measures](./skills/quality-measures/) | pipeline | HEDIS calculation, enrollment checks, care gap detection, utilization rates |
+| [provider-denial-workup](./skills/provider-denial-workup/) | reasoning | Payer-ready appeal letters for CARC/RARC denials — medical necessity, timely filing, prior auth, coding |
 
 </details>
 

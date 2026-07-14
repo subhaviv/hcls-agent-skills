@@ -1,0 +1,15 @@
+id: provider-denial-workup-06
+prompt: 'I need help with a denial but I only have part of the info right now. Payer
+  is United Healthcare. The denial reason is CO-50 — not medically necessary. The
+  service was a sleep study (CPT 95810 — polysomnography). The patient is a 38-year-old
+  male with loud snoring, witnessed apneas, daytime sleepiness (Epworth score 14),
+  and BMI 34. Physician documented clinical suspicion for OSA and ordered the in-lab
+  study. UHC says a home sleep test should have been done first per their policy.
+
+  I don''t have the claim number or denial date in front of me right now.
+
+  Can you help me figure out if this is worth appealing?'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

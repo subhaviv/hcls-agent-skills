@@ -1,0 +1,24 @@
+id: provider-denial-workup-08
+prompt: 'Emergency situation — denial with urgent deadline. We just received a CO-50
+  denial from Kaiser Permanente on inpatient rehabilitation (CPT 97597 daily, revenue
+  code 0118) for a 71-year-old stroke patient. DOS 2026-06-28 through 2026-07-05
+  (8 days inpatient rehab), denial date 2026-07-08, claim CLM-2026-771009, member
+  ID KAI-3309112. Kaiser says: "Inpatient rehabilitation level of care not medically
+  necessary — patient could be managed at skilled nursing facility level."
+
+  Patient had an ischemic stroke on June 27 with right-sided hemiparesis and aphasia.
+  By June 28, physiatry documented: Functional Independence Measure (FIM) score 62
+  (indicating moderate assistance needed), patient able to tolerate 3 hours of therapy
+  per day, and realistic potential for significant functional improvement. Patient
+  was discharged home July 5 with improved FIM score of 89.
+
+  The denial letter says we have until July 13, 2026 to appeal — that is TODAY.
+
+  Provider: Pacific Rehabilitation Center, NPI 7788990011, 2100 Rehab Drive,
+  San Francisco CA 94102, (415) 555-0166. Signer: Dr. Amir Hassan MD, Physiatry.
+
+  URGENT — please draft the appeal immediately.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

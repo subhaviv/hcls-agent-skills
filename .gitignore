@@ -22,3 +22,10 @@ skills-lock.json
 # Demo
 demo/node_modules/
 demo/dist/
+
+# uv lockfile (install uses uv pip install, not uv sync)
+uv.lock
+
+# Generated Claude Code files
+.claude/
+CLAUDE.md

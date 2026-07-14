@@ -1,0 +1,23 @@
+id: provider-denial-workup-05
+prompt: 'We have a CO-96 denial from Medicare Advantage (Wellcare) on a bariatric
+  surgery claim — CPT 43644 (laparoscopic Roux-en-Y gastric bypass). DOS 2026-04-10,
+  denial date 2026-04-28, claim CLM-2026-554819, member ID WLC-1123344. Wellcare
+  says: "Service is not a covered benefit under this plan."
+
+  The patient is a 44-year-old female with BMI 42, type 2 diabetes on insulin, and
+  sleep apnea. She completed a 6-month medically supervised weight loss program and
+  received psych clearance. The surgeon is a bariatric center of excellence. Prior
+  auth was obtained — auth number AUTH-2026-88821.
+
+  We believe this is a misclassification — CMS covers bariatric surgery for Medicare
+  beneficiaries meeting BMI and comorbidity criteria, and this patient qualifies. We
+  think Wellcare is incorrectly applying a plan exclusion that should not apply.
+
+  Provider: Dr. James Okafor MD, Bariatric Surgery, NPI 5566778899, Midwest Surgical
+  Center, 3300 Health Blvd, Indianapolis IN 46202, (317) 555-0188.
+
+  Please work this up — is this appealable and what is the argument?'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

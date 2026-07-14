@@ -1,0 +1,20 @@
+id: provider-denial-workup-03
+prompt: 'Got a CO-29 timely filing denial from Humana on a colonoscopy claim (CPT
+  45378). DOS was 2026-01-14, denial date 2026-05-02, claim CLM-2026-119842, member
+  ID HUM-7732091. Humana requires claims within 90 days of DOS — deadline was April
+  14. Humana says the claim was received May 1, which is 107 days post-DOS.
+
+  Our billing manager says the claim was submitted electronically via our clearinghouse
+  (Waystar) on April 10 — within the window. We have the clearinghouse acceptance
+  report showing "Accepted – 2026-04-10, Payer: Humana, Confirmation: WYS-20260410-119842."
+  Humana is saying they have no record of receiving it from the clearinghouse.
+
+  Patient: Gerald T. Morrison, DOB 1958-11-03, member HUM-7732091.
+  Provider: Riverside Gastroenterology, NPI 3344556677, 901 River Road Suite 4,
+  Portland OR 97201, (503) 555-0233. Signer: Dr. Priya Nair MD.
+
+  We need to appeal this — we have the clearinghouse proof. Help us draft the letter.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare

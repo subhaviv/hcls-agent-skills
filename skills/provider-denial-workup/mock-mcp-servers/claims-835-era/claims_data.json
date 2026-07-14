@@ -1,0 +1,180 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2026-778213",
+      "member_id": "MHP-4471902",
+      "member_name": "Jane A. Doe",
+      "member_dob": "1979-01-15",
+      "payer": "Meridian Health Plan",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Westside Orthopedic & Spine",
+      "provider_npi": "1122334455",
+      "provider_tax_id": "11-2233445",
+      "provider_address": "880 Medical Plaza Dr, Suite 200, Los Angeles CA 90017",
+      "provider_phone": "(213) 555-0101",
+      "provider_fax": "(213) 555-0102",
+      "date_of_service": "2026-06-10",
+      "denial_date": "2026-06-28",
+      "appeal_deadline": "2026-08-27",
+      "appeal_deadline_days": 60,
+      "service_lines": [
+        {
+          "cpt": "72148",
+          "cpt_description": "MRI lumbar spine without contrast",
+          "icd10": ["M54.16"],
+          "icd10_descriptions": ["Lumbar radiculopathy"],
+          "billed_amount": 1850.00,
+          "allowed_amount": 0.00,
+          "paid_amount": 0.00,
+          "carc": "CO-50",
+          "rarc": "N390",
+          "carc_description": "These are non-covered services because this is not deemed a medical necessity by the payer.",
+          "rarc_description": "This payment is being made conditionally."
+        }
+      ],
+      "denial_rationale": "Conservative treatment not documented prior to advanced imaging per medical policy RAD-014.",
+      "policy_cited": "RAD-014",
+      "appeal_rights": "You have the right to appeal this decision within 60 days of the denial date. Submit appeal to: Meridian Health Plan Appeals & Grievances, P.O. Box 55210, Phoenix AZ 85027."
+    },
+    {
+      "claim_id": "CLM-2026-991042",
+      "member_id": "BCH-8823041",
+      "member_name": "Robert J. Callahan",
+      "member_dob": "1968-03-14",
+      "payer": "BlueCrest Health Plan",
+      "payer_type": "commercial_hmo",
+      "provider_name": "Westlake Cardiovascular Associates",
+      "provider_npi": "1234567890",
+      "provider_tax_id": "12-3456789",
+      "provider_address": "4801 Westlake Drive, Suite 310, Austin TX 78746",
+      "provider_phone": "(512) 555-0182",
+      "provider_fax": "(512) 555-0199",
+      "date_of_service": "2026-07-01",
+      "denial_date": "2026-07-09",
+      "appeal_deadline": "2026-09-07",
+      "appeal_deadline_days": 60,
+      "service_lines": [
+        {
+          "cpt": "78452",
+          "cpt_description": "Myocardial perfusion imaging, tomographic (SPECT), multiple studies",
+          "icd10": ["I25.10"],
+          "icd10_descriptions": ["Atherosclerotic heart disease of native coronary artery without angina pectoris"],
+          "billed_amount": 3200.00,
+          "allowed_amount": 0.00,
+          "paid_amount": 0.00,
+          "carc": "CO-197",
+          "rarc": "N104",
+          "carc_description": "Precertification/authorization/notification absent.",
+          "rarc_description": "This claim/service requires a referral/prior authorization."
+        }
+      ],
+      "denial_rationale": "Service requires prior authorization per BlueCrest medical policy CARD-022. No authorization on file at time of service.",
+      "policy_cited": "CARD-022",
+      "appeal_rights": "You have the right to appeal this decision within 60 days of the denial date. Submit appeal to: BlueCrest Health Plan Appeals & Grievances, P.O. Box 74210, Denver CO 80274."
+    },
+    {
+      "claim_id": "CLM-2026-554317",
+      "member_id": "UHC-3319047",
+      "member_name": "Maria T. Sandoval",
+      "member_dob": "1991-07-22",
+      "payer": "UnitedHealthcare",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Riverside General Hospital",
+      "provider_npi": "9876543210",
+      "provider_tax_id": "98-7654321",
+      "provider_address": "2200 Riverside Blvd, Sacramento CA 95818",
+      "provider_phone": "(916) 555-0244",
+      "provider_fax": "(916) 555-0299",
+      "date_of_service": "2026-03-10",
+      "denial_date": "2026-06-25",
+      "appeal_deadline": "2026-08-24",
+      "appeal_deadline_days": 60,
+      "service_lines": [
+        {
+          "cpt": "44970",
+          "cpt_description": "Laparoscopic appendectomy",
+          "icd10": ["K37"],
+          "icd10_descriptions": ["Unspecified appendicitis"],
+          "billed_amount": 12400.00,
+          "allowed_amount": 0.00,
+          "paid_amount": 0.00,
+          "carc": "CO-29",
+          "rarc": "M60",
+          "carc_description": "The time limit for filing has expired.",
+          "rarc_description": "You have filed a duplicate claim."
+        }
+      ],
+      "denial_rationale": "Claim submitted after the timely filing deadline. Plan requires claims submission within 90 days of date of service. Claim received 2026-06-15, which is 97 days after the date of service.",
+      "policy_cited": "UHC Timely Filing Policy — 90 days from DOS",
+      "filing_deadline_days": 90,
+      "filing_deadline_date": "2026-06-08",
+      "appeal_rights": "You have the right to appeal this decision within 60 days of the denial date. Submit appeal to: UnitedHealthcare Appeals & Grievances, P.O. Box 30432, Salt Lake City UT 84130."
+    }
+  ],
+  "submission_history": [
+    {
+      "claim_id": "CLM-2026-778213",
+      "submissions": [
+        {
+          "submission_date": "2026-06-11",
+          "channel": "EDI_clearinghouse",
+          "clearinghouse": "Availity",
+          "status": "accepted",
+          "confirmation": "AVL-20260611-778213",
+          "notes": "Clean claim, accepted same day"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-2026-991042",
+      "submissions": [
+        {
+          "submission_date": "2026-07-02",
+          "channel": "EDI_clearinghouse",
+          "clearinghouse": "Change Healthcare",
+          "status": "accepted",
+          "confirmation": "CHC-20260702-991042",
+          "notes": "Clean claim, accepted"
+        }
+      ],
+      "prior_auth_history": [
+        {
+          "submission_date": "2026-06-28",
+          "channel": "BlueCrest_provider_portal",
+          "status": "submitted",
+          "confirmation": "PA-2026-441892",
+          "notes": "Portal confirmation issued; authorization decision not recorded in payer system"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-2026-554317",
+      "submissions": [
+        {
+          "submission_date": "2026-03-28",
+          "channel": "fax",
+          "fax_number": "1-800-555-0193",
+          "status": "failed",
+          "confirmation": null,
+          "notes": "Transmission result: FAILED — line busy"
+        },
+        {
+          "submission_date": "2026-04-02",
+          "channel": "fax",
+          "fax_number": "1-800-555-0193",
+          "status": "unknown",
+          "confirmation": null,
+          "notes": "Transmission attempted; confirmation page not saved"
+        },
+        {
+          "submission_date": "2026-06-15",
+          "channel": "EDI_clearinghouse",
+          "clearinghouse": "Availity",
+          "status": "accepted",
+          "confirmation": "AVL-20260615-554317",
+          "notes": "Accepted but 97 days post-DOS; 7 days past 90-day filing deadline"
+        }
+      ]
+    }
+  ]
+}

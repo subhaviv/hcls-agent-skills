@@ -1,0 +1,91 @@
+{
+  "_disclaimer": "SYNTHETIC DEMO DATA. These criteria are fabricated for demonstration and do NOT reproduce InterQual, MCG, or any licensed/copyrighted criteria content. They only mimic the STRUCTURE of medical-necessity criteria (criterion set -> requirements -> meets/does-not-meet) for demo purposes. Not for clinical or coverage use.",
+  "criteria_sets": [
+    {
+      "criteria_id": "MN-RAD-014",
+      "title": "Advanced Imaging - Lumbar MRI (without contrast)",
+      "cpt_codes": ["72148"],
+      "category": "medical_necessity",
+      "applicable_diagnoses": ["M54.16", "M54.17", "M51.16", "M51.17"],
+      "requirements": [
+        {
+          "id": "R1",
+          "description": "Documented conservative therapy of at least 6 weeks (e.g., physical therapy, NSAIDs, activity modification) prior to advanced imaging.",
+          "required": true
+        },
+        {
+          "id": "R2",
+          "description": "Documented neurologic finding (e.g., radiculopathy, positive straight-leg raise, dermatomal sensory/motor deficit).",
+          "required": true
+        },
+        {
+          "id": "R3",
+          "description": "No meaningful clinical improvement after conservative therapy, OR progressive/red-flag symptoms warranting expedited imaging.",
+          "required": true
+        }
+      ],
+      "red_flags_bypass": [
+        "Cauda equina syndrome",
+        "Progressive motor deficit",
+        "Suspected malignancy or infection",
+        "Trauma with neurologic deficit"
+      ]
+    },
+    {
+      "criteria_id": "MN-CARD-021",
+      "title": "Cardiac Stress Testing - Nuclear (SPECT MPI)",
+      "cpt_codes": ["78452"],
+      "category": "medical_necessity",
+      "applicable_diagnoses": ["I20.9", "R07.9", "I25.10"],
+      "requirements": [
+        {
+          "id": "R1",
+          "description": "Documented symptoms suggestive of ischemia (typical/atypical angina, anginal equivalent) OR intermediate/high pretest probability of CAD.",
+          "required": true
+        },
+        {
+          "id": "R2",
+          "description": "Resting ECG that is uninterpretable for ischemia OR patient unable to exercise (justifying pharmacologic/nuclear over standard exercise ECG).",
+          "required": true
+        },
+        {
+          "id": "R3",
+          "description": "Not performed within the routine screening interval for an asymptomatic low-risk patient.",
+          "required": true
+        }
+      ],
+      "red_flags_bypass": [
+        "Acute coronary syndrome with ongoing chest pain",
+        "Hemodynamic instability"
+      ]
+    },
+    {
+      "criteria_id": "MN-ADM-100",
+      "title": "Inpatient Admission vs. Observation - General Medical",
+      "cpt_codes": [],
+      "category": "level_of_care",
+      "applicable_diagnoses": ["*"],
+      "requirements": [
+        {
+          "id": "R1",
+          "description": "Documented clinical need for hospital care with expectation of a stay crossing two midnights (inpatient), OR anticipated short stay < 2 midnights (observation).",
+          "required": true
+        },
+        {
+          "id": "R2",
+          "description": "Severity of illness: abnormal vitals/labs or acute condition requiring active inpatient-level management.",
+          "required": true
+        },
+        {
+          "id": "R3",
+          "description": "Intensity of service: treatment requiring the hospital setting (e.g., IV therapy, continuous monitoring, frequent reassessment).",
+          "required": true
+        }
+      ],
+      "red_flags_bypass": [
+        "ICU-level care required",
+        "Post-operative recovery requiring inpatient monitoring"
+      ]
+    }
+  ]
+}

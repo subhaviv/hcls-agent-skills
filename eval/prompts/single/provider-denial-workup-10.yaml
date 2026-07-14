@@ -1,0 +1,25 @@
+id: provider-denial-workup-10
+prompt: 'We received a CO-50 denial from Magellan Health (behavioral health carve-out)
+  on 10 days of inpatient psychiatric admission (revenue code 0114) for a 29-year-old
+  female admitted after a suicide attempt. Admission dates 2026-05-01 through 2026-05-10,
+  denial date 2026-05-28, claim CLM-2026-448812, member ID MAG-2218833. Magellan
+  says: "Continued inpatient stay not medically necessary after day 3 — patient
+  stabilized and could be stepped down to partial hospitalization."
+
+  Clinical summary: Patient was admitted following an intentional overdose (acetaminophen).
+  Days 1-3: medically monitored for hepatotoxicity in med-surg. Transferred to
+  inpatient psych day 4. Psychiatry documented: active suicidal ideation with plan
+  through day 7, inability to contract for safety, no viable outpatient support
+  system (homeless, no family). Patient was stabilized by day 9 and discharged to
+  a residential program day 10.
+
+  The denial covers days 4-10 of the psych portion only.
+
+  Provider: Metro Behavioral Health Hospital, NPI 9900112233, 600 Mental Health
+  Blvd, Denver CO 80201, (720) 555-0144. Signer: Dr. Fatima Al-Rashid MD, Psychiatry.
+
+  Please assess and draft the appeal for the denied inpatient psychiatric days.'
+
+target_skills:
+- provider-denial-workup
+domain: healthcare
