@@ -1,0 +1,17 @@
+id: provider-underpayment-explainer-08
+prompt: 'I have a remittance from Anthem with three lines and I am not sure which
+  ones are wrong. Here is what I have:
+
+  Line 1 — CPT 99215 (level 5 office visit): billed $350, paid $280, CARC CO-45.
+  Our contracted rate is $295.
+  Line 2 — CPT 36415 (venipuncture): billed $25, paid $3, CARC CO-45.
+  Our contracted rate is $12.
+  Line 3 — CPT 93000 (ECG with interpretation): billed $95, paid $28.86, CARC OA-23.
+  Our contracted rate is $29.45.
+
+  Patient: Sandra Kim, member ANT-9981234, DOS 2026-06-20, claim CLM-2026-774411.
+  Can you work out what the variance is on each line and whether any of them are
+  worth disputing?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

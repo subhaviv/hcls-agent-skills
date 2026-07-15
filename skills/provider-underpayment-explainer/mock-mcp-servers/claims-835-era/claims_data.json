@@ -1,0 +1,529 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2026-778213",
+      "member_id": "MHP-4471902",
+      "member_name": "Jane A. Doe",
+      "member_dob": "1979-01-15",
+      "payer": "Meridian Health Plan",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Westside Orthopedic & Spine",
+      "provider_npi": "1122334455",
+      "provider_tax_id": "11-2233445",
+      "provider_address": "880 Medical Plaza Dr, Suite 200, Los Angeles CA 90017",
+      "provider_phone": "(213) 555-0101",
+      "provider_fax": "(213) 555-0102",
+      "date_of_service": "2026-06-10",
+      "denial_date": "2026-06-28",
+      "appeal_deadline": "2026-08-27",
+      "appeal_deadline_days": 60,
+      "service_lines": [
+        {
+          "cpt": "72148",
+          "cpt_description": "MRI lumbar spine without contrast",
+          "icd10": ["M54.16"],
+          "icd10_descriptions": ["Lumbar radiculopathy"],
+          "billed_amount": 1850.00,
+          "allowed_amount": 0.00,
+          "paid_amount": 0.00,
+          "carc": "CO-50",
+          "rarc": "N390",
+          "carc_description": "These are non-covered services because this is not deemed a medical necessity by the payer.",
+          "rarc_description": "This payment is being made conditionally."
+        }
+      ],
+      "denial_rationale": "Conservative treatment not documented prior to advanced imaging per medical policy RAD-014.",
+      "policy_cited": "RAD-014",
+      "appeal_rights": "You have the right to appeal this decision within 60 days of the denial date. Submit appeal to: Meridian Health Plan Appeals & Grievances, P.O. Box 55210, Phoenix AZ 85027."
+    },
+    {
+      "claim_id": "CLM-2026-991042",
+      "member_id": "BCH-8823041",
+      "member_name": "Robert J. Callahan",
+      "member_dob": "1968-03-14",
+      "payer": "BlueCrest Health Plan",
+      "payer_type": "commercial_hmo",
+      "provider_name": "Westlake Cardiovascular Associates",
+      "provider_npi": "1234567890",
+      "provider_tax_id": "12-3456789",
+      "provider_address": "4801 Westlake Drive, Suite 310, Austin TX 78746",
+      "provider_phone": "(512) 555-0182",
+      "provider_fax": "(512) 555-0199",
+      "date_of_service": "2026-07-01",
+      "denial_date": "2026-07-09",
+      "appeal_deadline": "2026-09-07",
+      "appeal_deadline_days": 60,
+      "service_lines": [
+        {
+          "cpt": "78452",
+          "cpt_description": "Myocardial perfusion imaging, tomographic (SPECT), multiple studies",
+          "icd10": ["I25.10"],
+          "icd10_descriptions": ["Atherosclerotic heart disease of native coronary artery without angina pectoris"],
+          "billed_amount": 3200.00,
+          "allowed_amount": 0.00,
+          "paid_amount": 0.00,
+          "carc": "CO-197",
+          "rarc": "N104",
+          "carc_description": "Precertification/authorization/notification absent.",
+          "rarc_description": "This claim/service requires a referral/prior authorization."
+        }
+      ],
+      "denial_rationale": "Service requires prior authorization per BlueCrest medical policy CARD-022. No authorization on file at time of service.",
+      "policy_cited": "CARD-022",
+      "appeal_rights": "You have the right to appeal this decision within 60 days of the denial date. Submit appeal to: BlueCrest Health Plan Appeals & Grievances, P.O. Box 74210, Denver CO 80274."
+    },
+    {
+      "claim_id": "CLM-2026-554317",
+      "member_id": "UHC-3319047",
+      "member_name": "Maria T. Sandoval",
+      "member_dob": "1991-07-22",
+      "payer": "UnitedHealthcare",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Riverside General Hospital",
+      "provider_npi": "9876543210",
+      "provider_tax_id": "98-7654321",
+      "provider_address": "2200 Riverside Blvd, Sacramento CA 95818",
+      "provider_phone": "(916) 555-0244",
+      "provider_fax": "(916) 555-0299",
+      "date_of_service": "2026-03-10",
+      "denial_date": "2026-06-25",
+      "appeal_deadline": "2026-08-24",
+      "appeal_deadline_days": 60,
+      "service_lines": [
+        {
+          "cpt": "44970",
+          "cpt_description": "Laparoscopic appendectomy",
+          "icd10": ["K37"],
+          "icd10_descriptions": ["Unspecified appendicitis"],
+          "billed_amount": 12400.00,
+          "allowed_amount": 0.00,
+          "paid_amount": 0.00,
+          "carc": "CO-29",
+          "rarc": "M60",
+          "carc_description": "The time limit for filing has expired.",
+          "rarc_description": "You have filed a duplicate claim."
+        }
+      ],
+      "denial_rationale": "Claim submitted after the timely filing deadline. Plan requires claims submission within 90 days of date of service. Claim received 2026-06-15, which is 97 days after the date of service.",
+      "policy_cited": "UHC Timely Filing Policy — 90 days from DOS",
+      "filing_deadline_days": 90,
+      "filing_deadline_date": "2026-06-08",
+      "appeal_rights": "You have the right to appeal this decision within 60 days of the denial date. Submit appeal to: UnitedHealthcare Appeals & Grievances, P.O. Box 30432, Salt Lake City UT 84130."
+    }
+    ,
+    {
+      "claim_id": "CLM-2026-661488",
+      "member_id": "BCBS-7720194",
+      "member_name": "Angela R. Morrison",
+      "member_dob": "1971-09-03",
+      "payer": "BlueCross BlueShield of Ohio",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Summit Orthopedics",
+      "provider_npi": "1663000000",
+      "provider_tax_id": "66-3000001",
+      "provider_address": "1200 Summit Medical Way, Suite 400, Columbus OH 43215",
+      "provider_phone": "(614) 555-0188",
+      "provider_fax": "(614) 555-0199",
+      "date_of_service": "2026-05-14",
+      "payment_date": "2026-06-02",
+      "dispute_deadline": "2026-09-01",
+      "dispute_deadline_days": 90,
+      "claim_type": "underpayment",
+      "service_lines": [
+        {
+          "cpt": "27447",
+          "cpt_description": "Total knee arthroplasty",
+          "icd10": ["M17.11"],
+          "icd10_descriptions": ["Primary osteoarthritis, right knee"],
+          "billed_amount": 42500.00,
+          "expected_amount": 38750.00,
+          "allowed_amount": 31200.00,
+          "paid_amount": 31200.00,
+          "carc": "CO-45",
+          "rarc": "",
+          "carc_description": "Charges exceed fee schedule/maximum allowable or contracted/legislated fee arrangement.",
+          "rarc_description": "",
+          "modifier": ""
+        }
+      ],
+      "contract_reference": "BCBS Ohio Provider Agreement, Exhibit B, Section 3 — Orthopedic Surgical Procedures, effective 2026-01-01: 110% of current Medicare MPFS (facility rate). 2026 MPFS rate for CPT 27447 (facility): $35,227.27. Expected at 110%: $38,750.00. Paid amount of $31,200.00 matches 2025 rate (100% MPFS) — annual escalator not loaded.",
+      "underpayment_rationale": "Payer adjudicated at 2025 contract rate (100% of MPFS = $31,200.00) instead of 2026 rate (110% of MPFS = $38,750.00). Annual escalator effective 2026-01-01 was not applied.",
+      "dispute_address": "BlueCross BlueShield of Ohio, Attn: Provider Disputes / Payment Integrity, P.O. Box 80219, Columbus OH 43280"
+    },
+    {
+      "claim_id": "CLM-2026-884201",
+      "member_id": "AET-4481092",
+      "member_name": "Marcus T. Rivera",
+      "member_dob": "1964-11-18",
+      "payer": "Aetna Better Health",
+      "payer_type": "commercial_hmo",
+      "provider_name": "Coastal Spine & Orthopedics",
+      "provider_npi": "1720000001",
+      "provider_tax_id": "72-0000012",
+      "provider_address": "3300 Coastal Medical Blvd, Suite 100, San Diego CA 92123",
+      "provider_phone": "(619) 555-0141",
+      "provider_fax": "(619) 555-0142",
+      "date_of_service": "2026-04-22",
+      "payment_date": "2026-05-10",
+      "dispute_deadline": "2026-08-08",
+      "dispute_deadline_days": 90,
+      "claim_type": "underpayment",
+      "service_lines": [
+        {
+          "cpt": "22612",
+          "cpt_description": "Lumbar fusion, posterior, single level",
+          "icd10": ["M43.16"],
+          "icd10_descriptions": ["Spondylolisthesis, lumbar region"],
+          "billed_amount": 58000.00,
+          "expected_amount": 52400.00,
+          "allowed_amount": 44540.00,
+          "paid_amount": 44540.00,
+          "carc": "CO-45",
+          "rarc": "",
+          "carc_description": "Charges exceed fee schedule/maximum allowable or contracted/legislated fee arrangement.",
+          "rarc_description": "",
+          "modifier": ""
+        },
+        {
+          "cpt": "22614",
+          "cpt_description": "Lumbar fusion, posterior, each additional level",
+          "icd10": ["M43.16"],
+          "icd10_descriptions": ["Spondylolisthesis, lumbar region"],
+          "billed_amount": 28500.00,
+          "expected_amount": 14250.00,
+          "allowed_amount": 14250.00,
+          "paid_amount": 14250.00,
+          "carc": "CO-97",
+          "rarc": "",
+          "carc_description": "The benefit for this service is included in the payment/allowance for another service/procedure that has already been adjudicated.",
+          "rarc_description": "",
+          "modifier": "-51"
+        },
+        {
+          "cpt": "22840",
+          "cpt_description": "Posterior segmental instrumentation",
+          "icd10": ["M43.16"],
+          "icd10_descriptions": ["Spondylolisthesis, lumbar region"],
+          "billed_amount": 18200.00,
+          "expected_amount": 9100.00,
+          "allowed_amount": 9100.00,
+          "paid_amount": 9100.00,
+          "carc": "CO-97",
+          "rarc": "",
+          "carc_description": "The benefit for this service is included in the payment/allowance for another service/procedure that has already been adjudicated.",
+          "rarc_description": "",
+          "modifier": "-51"
+        },
+        {
+          "cpt": "99232",
+          "cpt_description": "Subsequent hospital care, moderate complexity",
+          "icd10": ["M43.16"],
+          "icd10_descriptions": ["Spondylolisthesis, lumbar region"],
+          "billed_amount": 420.00,
+          "expected_amount": 210.00,
+          "allowed_amount": 205.80,
+          "paid_amount": 205.80,
+          "carc": "OA-23",
+          "rarc": "",
+          "carc_description": "The impact of prior payer(s) adjudication including payments and/or adjustments.",
+          "rarc_description": "",
+          "modifier": ""
+        }
+      ],
+      "contract_reference": "Aetna Better Health Provider Agreement, Exhibit C, Section 2 — Spinal Surgical Procedures, effective 2025-07-01: 85% of current Medicare MPFS (inpatient facility rate). 2026 MPFS inpatient rate for CPT 22612: $61,647.06. Expected at 85%: $52,400.00. Paid amount of $44,540.00 matches 72.25% of MPFS — incorrect percentage applied.",
+      "underpayment_rationale": "CPT 22612: payer applied 72.25% of MPFS ($44,540) instead of contracted 85% ($52,400). CPT 22614 and 22840: 50% MPR via CO-97 is correct. CPT 99232: OA-23 sequestration (2%) is mandatory and not disputable.",
+      "dispute_address": "Aetna Better Health, Attn: Provider Disputes / Payment Integrity, P.O. Box 14079, Lexington KY 40512"
+    },
+    {
+      "claim_id": "CLM-2026-447731",
+      "member_id": "HUM-8819203",
+      "member_name": "Patricia L. Nguyen",
+      "member_dob": "1958-04-07",
+      "payer": "Humana Gold Plus (Medicare Advantage)",
+      "payer_type": "medicare_advantage",
+      "provider_name": "Gastro Associates of Florida",
+      "provider_npi": "1831000002",
+      "provider_tax_id": "83-1000023",
+      "provider_address": "720 GI Medical Way, Suite 210, Tampa FL 33607",
+      "provider_phone": "(813) 555-0177",
+      "provider_fax": "(813) 555-0178",
+      "date_of_service": "2026-05-22",
+      "payment_date": "2026-06-14",
+      "dispute_deadline": "2026-09-12",
+      "dispute_deadline_days": 90,
+      "claim_type": "underpayment",
+      "service_lines": [
+        {
+          "cpt": "45378",
+          "cpt_description": "Colonoscopy, flexible; diagnostic",
+          "icd10": ["Z12.11"],
+          "icd10_descriptions": ["Encounter for screening for malignant neoplasm of colon"],
+          "billed_amount": 2800.00,
+          "expected_amount": 520.00,
+          "allowed_amount": 312.00,
+          "paid_amount": 312.00,
+          "carc": "CO-45",
+          "rarc": "N362",
+          "carc_description": "Charges exceed fee schedule/maximum allowable or contracted/legislated fee arrangement.",
+          "rarc_description": "The procedure/revenue code is inconsistent with the patient's age.",
+          "modifier": ""
+        }
+      ],
+      "contract_reference": "Humana Medicare Advantage Provider Agreement, Exhibit D, effective 2026-01-01: GI endoscopy procedures reimbursed at 80% of MPFS. 2026 MPFS rate for CPT 45378: $650.00. Expected at 80%: $520.00. Paid $312.00 matches CPT 45330 (sigmoidoscopy) rate — payer downcoded full colonoscopy to sigmoidoscopy.",
+      "underpayment_rationale": "Payer paid at CPT 45330 (sigmoidoscopy) rate of $312.00 instead of CPT 45378 (colonoscopy) rate of $520.00. Operative report confirms complete colonoscopy to cecum. CO-45 + RARC N362 indicates downcode.",
+      "dispute_address": "Humana Provider Disputes, Attn: Payment Integrity, P.O. Box 14601, Lexington KY 40512"
+    },
+    {
+      "claim_id": "CLM-2026-552904",
+      "member_id": "CIG-3318820",
+      "member_name": "Thomas R. Beckett",
+      "member_dob": "1975-12-22",
+      "payer": "Cigna HealthCare",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Metro Cardiology Group",
+      "provider_npi": "1944000003",
+      "provider_tax_id": "94-4000034",
+      "provider_address": "500 Heart Center Blvd, Suite 300, Atlanta GA 30308",
+      "provider_phone": "(404) 555-0155",
+      "provider_fax": "(404) 555-0156",
+      "date_of_service": "2026-06-03",
+      "payment_date": "2026-07-01",
+      "dispute_deadline": "2026-09-29",
+      "dispute_deadline_days": 90,
+      "claim_type": "underpayment",
+      "service_lines": [
+        {
+          "cpt": "93306",
+          "cpt_description": "Echocardiography, transthoracic, real-time with image documentation; complete",
+          "icd10": ["I50.9"],
+          "icd10_descriptions": ["Heart failure, unspecified"],
+          "billed_amount": 1800.00,
+          "expected_amount": 420.00,
+          "allowed_amount": 210.00,
+          "paid_amount": 210.00,
+          "carc": "CO-97",
+          "rarc": "",
+          "carc_description": "The benefit for this service is included in the payment/allowance for another service/procedure that has already been adjudicated.",
+          "rarc_description": "",
+          "modifier": "-26"
+        }
+      ],
+      "contract_reference": "Cigna Provider Agreement, Exhibit A, effective 2025-10-01: Cardiology diagnostic studies at 95% of MPFS (global). Provider owns equipment and bills globally. 2026 MPFS global rate for CPT 93306: $442.11. Expected at 95%: $420.00. Payer paid $210.00 — applied professional-component-only rate due to modifier -26, but global billing is correct.",
+      "underpayment_rationale": "Payer treated modifier -26 (professional component) as present on claim and paid only the professional component rate ($210). Provider bills globally — owns the echo equipment and performs interpretation. Modifier -26 was not on the submitted claim. CO-97 applied in error; global rate of $420.00 is correct.",
+      "dispute_address": "Cigna Provider Disputes, Attn: Payment Integrity, P.O. Box 188004, Chattanooga TN 37422"
+    },
+    {
+      "claim_id": "CLM-2026-339017",
+      "member_id": "ANT-6612904",
+      "member_name": "Sandra K. Williams",
+      "member_dob": "1982-06-14",
+      "payer": "Anthem Blue Cross",
+      "payer_type": "commercial_ppo",
+      "provider_name": "West Coast Surgical Partners",
+      "provider_npi": "2055000004",
+      "provider_tax_id": "05-5000045",
+      "provider_address": "1800 Surgical Center Dr, Suite 500, Los Angeles CA 90025",
+      "provider_phone": "(310) 555-0166",
+      "provider_fax": "(310) 555-0167",
+      "date_of_service": "2026-05-29",
+      "payment_date": "2026-06-20",
+      "dispute_deadline": "2026-09-18",
+      "dispute_deadline_days": 90,
+      "claim_type": "underpayment",
+      "service_lines": [
+        {
+          "cpt": "47562",
+          "cpt_description": "Laparoscopic cholecystectomy",
+          "icd10": ["K80.20"],
+          "icd10_descriptions": ["Calculus of gallbladder without cholecystitis without obstruction"],
+          "billed_amount": 12800.00,
+          "expected_amount": 9800.00,
+          "allowed_amount": 4100.00,
+          "paid_amount": 4100.00,
+          "carc": "CO-22",
+          "rarc": "",
+          "carc_description": "This care may be covered by another payer per coordination of benefits.",
+          "rarc_description": "",
+          "modifier": ""
+        }
+      ],
+      "contract_reference": "Anthem Blue Cross Provider Agreement, Exhibit B, Section 4, effective 2026-01-01: General surgery at 90% of MPFS. 2026 MPFS rate for CPT 47562: $10,889.00. Expected at 90%: $9,800.00. COB reduction applied incorrectly — eligibility verification confirmed single coverage, no secondary payer.",
+      "underpayment_rationale": "CO-22 COB adjustment applied in error. Provider verified patient eligibility prior to surgery — Anthem is the only active coverage. No secondary payer exists. Payer reduced payment to $4,100 as if a secondary had paid a primary balance. Full contracted rate of $9,800 is owed.",
+      "dispute_address": "Anthem Blue Cross Provider Disputes, Attn: Payment Integrity, P.O. Box 60007, Los Angeles CA 90060"
+    },
+    {
+      "claim_id": "CLM-2026-712084",
+      "member_id": "UHC-5541109",
+      "member_name": "James D. Park",
+      "member_dob": "1969-02-28",
+      "payer": "UnitedHealthcare",
+      "payer_type": "commercial_ppo",
+      "provider_name": "Northside Internal Medicine",
+      "provider_npi": "2166000005",
+      "provider_tax_id": "16-6000056",
+      "provider_address": "900 Medical Center Pkwy, Suite 120, Chicago IL 60611",
+      "provider_phone": "(312) 555-0133",
+      "provider_fax": "(312) 555-0134",
+      "date_of_service": "2026-06-18",
+      "payment_date": "2026-07-05",
+      "claim_type": "paid_correctly",
+      "service_lines": [
+        {
+          "cpt": "99214",
+          "cpt_description": "Office or other outpatient visit, established patient, moderate complexity",
+          "icd10": ["E11.65", "I10"],
+          "icd10_descriptions": ["Type 2 diabetes mellitus with hyperglycemia", "Essential (primary) hypertension"],
+          "billed_amount": 320.00,
+          "expected_amount": 165.00,
+          "allowed_amount": 165.00,
+          "paid_amount": 165.00,
+          "carc": "",
+          "rarc": "",
+          "carc_description": "",
+          "rarc_description": "",
+          "modifier": ""
+        }
+      ],
+      "payment_notes": "Paid at contracted rate. UHC Provider Agreement, Exhibit A: E/M services at 100% of MPFS. 2026 MPFS rate for CPT 99214: $165.00. No variance.",
+      "dispute_address": ""
+    },
+    {
+      "claim_id": "CLM-2026-803345",
+      "member_id": "BCB-7731204",
+      "member_name": "Elena M. Torres",
+      "member_dob": "1990-08-11",
+      "payer": "BlueCross BlueShield of Illinois",
+      "payer_type": "commercial_hmo",
+      "provider_name": "Lakeside Women's Health",
+      "provider_npi": "2277000006",
+      "provider_tax_id": "27-7000067",
+      "provider_address": "2400 Lakeshore Dr, Suite 600, Chicago IL 60614",
+      "provider_phone": "(312) 555-0144",
+      "provider_fax": "(312) 555-0145",
+      "date_of_service": "2026-06-25",
+      "payment_date": "2026-07-10",
+      "claim_type": "paid_correctly",
+      "service_lines": [
+        {
+          "cpt": "59400",
+          "cpt_description": "Routine obstetric care including antepartum care, vaginal delivery and postpartum care",
+          "icd10": ["Z34.32"],
+          "icd10_descriptions": ["Encounter for supervision of normal pregnancy, third trimester"],
+          "billed_amount": 4200.00,
+          "expected_amount": 3150.00,
+          "allowed_amount": 3150.00,
+          "paid_amount": 3150.00,
+          "carc": "",
+          "rarc": "",
+          "carc_description": "",
+          "rarc_description": "",
+          "modifier": ""
+        }
+      ],
+      "payment_notes": "Paid at contracted rate. BCBS Illinois Provider Agreement, Exhibit C: OB global packages at 75% of MPFS. 2026 MPFS rate for CPT 59400: $4,200.00. Expected at 75%: $3,150.00. No variance.",
+      "dispute_address": ""
+    },
+    {
+      "claim_id": "CLM-2026-921667",
+      "member_id": "AET-9920341",
+      "member_name": "William C. Foster",
+      "member_dob": "1955-03-19",
+      "payer": "Aetna Medicare Advantage",
+      "payer_type": "medicare_advantage",
+      "provider_name": "Eastside Orthopedic Surgery Center",
+      "provider_npi": "2388000007",
+      "provider_tax_id": "38-8000078",
+      "provider_address": "3600 Orthopedic Blvd, Suite 200, Phoenix AZ 85016",
+      "provider_phone": "(602) 555-0122",
+      "provider_fax": "(602) 555-0123",
+      "date_of_service": "2026-06-30",
+      "payment_date": "2026-07-11",
+      "claim_type": "paid_correctly",
+      "service_lines": [
+        {
+          "cpt": "29881",
+          "cpt_description": "Arthroscopy, knee, surgical; with meniscectomy",
+          "icd10": ["M23.201"],
+          "icd10_descriptions": ["Derangement of unspecified meniscus due to old tear or injury, right knee"],
+          "billed_amount": 8200.00,
+          "expected_amount": 6232.00,
+          "allowed_amount": 6232.00,
+          "paid_amount": 6232.00,
+          "carc": "",
+          "rarc": "",
+          "carc_description": "",
+          "rarc_description": "",
+          "modifier": ""
+        }
+      ],
+      "payment_notes": "Paid at contracted rate. Aetna Medicare Advantage Provider Agreement, Exhibit B: Orthopedic surgery at 95% of MPFS. 2026 MPFS rate for CPT 29881: $6,560.00. Expected at 95%: $6,232.00. No variance.",
+      "dispute_address": ""
+    }
+  ],
+  "submission_history": [
+    {
+      "claim_id": "CLM-2026-778213",
+      "submissions": [
+        {
+          "submission_date": "2026-06-11",
+          "channel": "EDI_clearinghouse",
+          "clearinghouse": "Availity",
+          "status": "accepted",
+          "confirmation": "AVL-20260611-778213",
+          "notes": "Clean claim, accepted same day"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-2026-991042",
+      "submissions": [
+        {
+          "submission_date": "2026-07-02",
+          "channel": "EDI_clearinghouse",
+          "clearinghouse": "Change Healthcare",
+          "status": "accepted",
+          "confirmation": "CHC-20260702-991042",
+          "notes": "Clean claim, accepted"
+        }
+      ],
+      "prior_auth_history": [
+        {
+          "submission_date": "2026-06-28",
+          "channel": "BlueCrest_provider_portal",
+          "status": "submitted",
+          "confirmation": "PA-2026-441892",
+          "notes": "Portal confirmation issued; authorization decision not recorded in payer system"
+        }
+      ]
+    },
+    {
+      "claim_id": "CLM-2026-554317",
+      "submissions": [
+        {
+          "submission_date": "2026-03-28",
+          "channel": "fax",
+          "fax_number": "1-800-555-0193",
+          "status": "failed",
+          "confirmation": null,
+          "notes": "Transmission result: FAILED — line busy"
+        },
+        {
+          "submission_date": "2026-04-02",
+          "channel": "fax",
+          "fax_number": "1-800-555-0193",
+          "status": "unknown",
+          "confirmation": null,
+          "notes": "Transmission attempted; confirmation page not saved"
+        },
+        {
+          "submission_date": "2026-06-15",
+          "channel": "EDI_clearinghouse",
+          "clearinghouse": "Availity",
+          "status": "accepted",
+          "confirmation": "AVL-20260615-554317",
+          "notes": "Accepted but 97 days post-DOS; 7 days past 90-day filing deadline"
+        }
+      ]
+    }
+  ]
+}

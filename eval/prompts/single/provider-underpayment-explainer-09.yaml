@@ -1,0 +1,10 @@
+id: provider-underpayment-explainer-09
+prompt: 'We did a laparoscopic cholecystectomy (CPT 47562) and billed $12,800.
+  Aetna paid $4,100. The ERA shows CARC CO-22 (COB adjustment). The patient does
+  NOT have secondary insurance — we verified eligibility before the procedure and
+  she only has Aetna. Our contracted rate for this CPT is $9,800. DOS 2026-05-29,
+  claim CLM-2026-663009, patient Maria Santos, member AET-6630192.
+  Aetna is applying a COB reduction that should not exist. What do we do?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

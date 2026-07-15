@@ -1,0 +1,11 @@
+id: provider-underpayment-explainer-04
+prompt: 'United Healthcare paid CPT 93306 (echocardiogram with Doppler) at $210
+  but we expected $420 based on our contract. CARC CO-97 with modifier -26 on the
+  claim. We are a cardiology group that owns the echo equipment and does both the
+  technical and professional components — we always bill globally. UHC seems to have
+  paid only the professional component rate. Claim number CLM-2026-557123, patient
+  Robert Chen, member UHC-4421109, DOS 2026-06-10. Our contract says 95% of MPFS
+  for cardiology diagnostic studies. Is the modifier causing this and can we dispute it?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

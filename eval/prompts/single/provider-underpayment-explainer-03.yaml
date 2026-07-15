@@ -1,0 +1,7 @@
+id: provider-underpayment-explainer-03
+prompt: 'Medicare paid us $184.31 on a 99214 office visit instead of the $188.07
+  we expected. CARC is OA-23. Patient is a Medicare fee-for-service beneficiary.
+  Our billed amount was $275. Is this worth disputing? Should I send a letter?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

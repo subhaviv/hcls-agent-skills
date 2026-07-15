@@ -1,0 +1,11 @@
+id: provider-underpayment-explainer-06
+prompt: 'Humana paid CPT 45378 (colonoscopy) at $312 but we expected $520 based on
+  our fee schedule. The ERA shows CARC CO-45 and RARC N362. The physician billed
+  CPT 45378 but Humana appears to have paid at the CPT 45330 (sigmoidoscopy) rate.
+  Patient is David Williams, member HUM-5534112, DOS 2026-05-02, claim CLM-2026-441872.
+  The operative report confirms a complete colonoscopy to the cecum. Our contract
+  is 80% of MPFS for GI endoscopy procedures. Is this a downcode and how do we
+  dispute it?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

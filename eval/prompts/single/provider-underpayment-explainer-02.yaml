@@ -1,0 +1,22 @@
+id: provider-underpayment-explainer-02
+prompt: 'We have a multi-line underpayment from Aetna on a lumbar spinal fusion claim
+  (CLM-2026-884201). Here are the service lines:
+
+  CPT 22612 (lumbar fusion, single level): billed $58,000, expected $52,400, paid
+  $44,540, CARC CO-45.
+  CPT 22614 (additional level, modifier -51): billed $28,500, expected $14,250,
+  paid $14,250, CARC CO-97.
+  CPT 22840 (posterior instrumentation, modifier -51): billed $18,200, expected
+  $9,100, paid $9,100, CARC CO-97.
+  CPT 99232 (subsequent hospital care): billed $420, expected $210, paid $205.80,
+  CARC OA-23.
+
+  Our contract (Aetna Better Health, Exhibit C, Section 2, effective 2025-07-01)
+  pays 85% of MPFS for inpatient spinal procedures. The 2026 Medicare inpatient
+  rate for CPT 22612 is $61,647.06. Patient: Marcus T. Rivera, member AET-4481092,
+  DOS 2026-04-22.
+
+  Please analyze all lines and tell me which ones to dispute.'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

@@ -1,0 +1,12 @@
+id: provider-underpayment-explainer-10
+prompt: 'I just got off the phone with our billing manager. She says we have been
+  getting short-paid by BlueCross on all our inpatient claims for the past 6 months
+  and nobody noticed because the amounts per claim are small — like $40 to $120 each.
+  But we just pulled a report and it is 47 claims totaling $3,840 in underpayments.
+  All show CARC CO-45. Our contract with BCBS has a 2.5% annual escalator that kicked
+  in on January 1 and they appear to not have applied it. What is the best way to
+  approach this — should I file 47 individual dispute letters or is there a better way?
+  And can you draft whatever letter we need?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

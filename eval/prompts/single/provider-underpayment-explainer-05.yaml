@@ -1,0 +1,12 @@
+id: provider-underpayment-explainer-05
+prompt: 'We have been noticing that Cigna has been consistently paying us about 8%
+  less than expected on all our orthopedic surgical claims since January 1 this year.
+  Our contract renews annually and includes a 3% CPI escalator effective each January 1.
+  Here is one example: CPT 29881 (knee arthroscopy with meniscectomy), claim
+  CLM-2026-334521, patient Lisa Park, member CIG-7712233, DOS 2026-03-15. Billed
+  $8,400, expected $7,200 (contract rate post-escalator), paid $6,624 (CARC CO-45).
+  This same pattern appears on at least 15 other claims we have reviewed. How should
+  we approach this — individual disputes or something else?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

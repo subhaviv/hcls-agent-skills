@@ -1,0 +1,11 @@
+id: provider-underpayment-explainer-01
+prompt: 'We received our remittance from BCBS of Ohio on a total knee arthroplasty
+  (CPT 27447) and it looks short. Claim CLM-2026-661488, patient Angela Morrison,
+  DOS 2026-05-14, POS 21 (inpatient). We billed $42,500. BCBS paid $31,200 with
+  CARC CO-45. Our contract (Exhibit B, effective 2026-01-01) says we get 110% of
+  Medicare MPFS for orthopedic surgical procedures. The 2026 Medicare facility rate
+  for CPT 27447 is $35,227.27, so we expected $38,750. Can you explain why this
+  was underpaid and draft a dispute letter?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare

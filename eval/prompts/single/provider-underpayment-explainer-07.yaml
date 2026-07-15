@@ -1,0 +1,9 @@
+id: provider-underpayment-explainer-07
+prompt: 'We are trying to figure out if we were underpaid on a claim. Payer is Molina
+  Medicaid (Ohio). Service was CPT 99213, DOS 2026-04-18. We billed $180. Molina
+  paid $62. We do not have a signed contract with Molina — we are a non-par provider
+  and this was an emergency visit. CARC is CO-45. Is there anything we can do here,
+  and if so what is the argument?'
+target_skills:
+- provider-underpayment-explainer
+domain: healthcare
