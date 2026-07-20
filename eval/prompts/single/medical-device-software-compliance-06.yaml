@@ -1,0 +1,43 @@
+id: medical-device-software-compliance-06
+prompt: 'A startup has developed "NeuroScan AI," a cloud-based SaMD that analyzes
+  EEG waveforms to detect early-onset epileptic activity and alerts clinicians via
+  a dashboard. The software runs on third-party cloud infrastructure (AWS) and incorporates
+  a pre-trained deep learning model (PyTorch framework, version 1.13.1) licensed from
+  an academic institution. Clinical validation was performed on 2,847 patients across
+  three sites, achieving 91.3% sensitivity and 88.7% specificity compared to board-certified
+  neurologist review.
+
+
+  The company is preparing a 510(k) submission targeting predicate device K193402
+  (a seizure detection system cleared in 2019). They have completed a preliminary
+  hazard analysis identifying two top-level hazards: (1) missed seizure detection
+  leading to delayed treatment, and (2) false positive alerts causing unnecessary
+  clinical intervention.
+
+
+  Please provide the following:
+
+
+  1. **IEC 62304 Safety Classification**: Determine the appropriate software safety
+  class for NeuroScan AI and justify your reasoning based on the two identified hazards
+  and the device''s intended use.
+
+
+  2. **SOUP Assessment**: Identify the SOUP/OTS components implied by the scenario
+  description, specify what documentation and verification activities IEC 62304 requires
+  for each, and flag any particular risk concerns.
+
+
+  3. **Predicate Comparison Gap Analysis**: Given the 2019 predicate device, identify
+  at least three technological or regulatory gaps that FDA reviewers would likely
+  scrutinize in the 510(k) submission, particularly related to the AI/ML component
+  and cloud architecture.
+
+
+  4. **Cybersecurity Considerations**: List five specific cybersecurity controls or
+  documentation requirements FDA would expect in the premarket submission per the
+  2023 cybersecurity guidance, relevant to this cloud-based AI device.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: intermediate

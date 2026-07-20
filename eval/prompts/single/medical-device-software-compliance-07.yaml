@@ -1,0 +1,46 @@
+id: medical-device-software-compliance-07
+prompt: 'Here is test question #7 of 10:
+
+
+  ---
+
+
+  Your company is developing **ClearPath AI**, a SaMD that analyzes retinal fundus
+  images to detect diabetic retinopathy (DR) and generate a severity score (No DR,
+  Mild, Moderate, Severe, Proliferative) for use by ophthalmologists in clinical decision-making.
+  The algorithm is a deep learning CNN trained on 847,000 annotated images. The device
+  will be deployed as a cloud-hosted web application accessed by clinicians in the
+  US and EU. Key parameters: sensitivity target ≥87%, specificity target ≥90%, intended
+  for use in adults aged 18–75, contraindicated for patients with prior retinal surgery.
+
+
+  Given this scenario, provide the following:
+
+
+  1. **Regulatory pathway analysis**: Determine the appropriate FDA submission pathway
+  (510(k), De Novo, or PMA) and justify your choice, identifying at least two potential
+  predicate devices if applicable.
+
+
+  2. **IEC 62304 safety classification**: Assign a software safety class (A, B, or
+  C) with full rationale based on the intended use and failure modes.
+
+
+  3. **PCCP framework outline**: Since this is an AI/ML device subject to ongoing
+  model retraining, draft the key sections that must be included in a Predetermined
+  Change Control Plan per FDA''s 2024 guidance, including at least three specific
+  modification types ClearPath AI might undergo and how each would be managed.
+
+
+  4. **EU MDR classification**: Identify the applicable MDR rule and device classification
+  (Class I, IIa, IIb, or III) under EU MDR 2017/745, and note one key difference in
+  clinical evidence requirements compared to the FDA pathway.
+
+
+  5. **Cybersecurity consideration**: Identify the single highest-priority cybersecurity
+  risk for a cloud-hosted AI diagnostic tool and recommend one specific control aligned
+  with FDA''s 2023 cybersecurity premarket guidance.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: intermediate

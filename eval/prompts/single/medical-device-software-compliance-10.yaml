@@ -1,0 +1,43 @@
+id: medical-device-software-compliance-10
+prompt: 'A startup has developed "NeuroScan AI," a cloud-based SaMD that analyzes
+  EEG waveforms to detect early-onset epileptic activity and automatically alerts
+  clinicians via integrated EHR notifications. The software runs on third-party cloud
+  infrastructure (AWS GovCloud) and incorporates a deep learning model trained on
+  847,000 patient-hours of EEG data. The algorithm outputs a risk score (0–100) with
+  a threshold of ≥65 triggering an alert, achieving 94.2% sensitivity and 89.7% specificity
+  in validation. False negatives could delay treatment for seizure activity, potentially
+  causing serious injury or death.
+
+
+  The company plans to submit a 510(k) referencing predicate K213456 (a rule-based
+  EEG analysis system cleared in 2022), pursue CE marking under EU MDR, and maintain
+  a Predetermined Change Control Plan (PCCP) to allow post-market model retraining
+  as new EEG data is collected.
+
+
+  Given this scenario, provide:
+
+
+  1. **IEC 62304 Safety Classification** — Determine the appropriate software safety
+  class with justification, including whether the cloud infrastructure and ML model
+  constitute separate software items requiring independent classification.
+
+
+  2. **510(k) Substantial Equivalence Risk** — Identify at least three specific substantial
+  equivalence challenges when using a rule-based predicate for an AI/ML-based device,
+  and recommend mitigation strategies for each.
+
+
+  3. **PCCP Structure** — Outline the required components of a compliant PCCP for
+  the model retraining scenario, specifying what performance boundary conditions (using
+  the stated metrics as baseline) would trigger a mandatory new submission versus
+  permitted modification.
+
+
+  4. **Cybersecurity Considerations** — List five specific premarket cybersecurity
+  documentation requirements per FDA''s 2023 guidance that apply to NeuroScan AI''s
+  cloud-connected architecture.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: hard

@@ -1,0 +1,43 @@
+id: medical-device-software-compliance-04
+prompt: 'A startup has developed "CardioSense AI," a cloud-based SaMD that analyzes
+  12-lead ECG waveforms using a deep learning algorithm to detect atrial fibrillation
+  (AF) and generate a diagnostic report for cardiologists. The device has been validated
+  on 45,000 patient records with 94.2% sensitivity and 97.8% specificity. The algorithm
+  was trained using TensorFlow 2.8 (an open-source framework) and deployed on AWS
+  cloud infrastructure. The company intends to seek FDA clearance and simultaneously
+  pursue EU MDR certification.
+
+
+  The clinical workflow is as follows: a cardiologist orders the ECG analysis, the
+  algorithm processes the waveform and outputs an AF probability score (0–100) with
+  a confidence threshold of ≥75 flagged as "AF Detected," and the cardiologist makes
+  the final treatment decision.
+
+
+  Given this context, provide the following deliverables:
+
+
+  1. **IEC 62304 Safety Classification**: Determine the software safety class (A,
+  B, or C) for CardioSense AI with a detailed justification referencing the severity
+  of potential harm if the software fails (both false positive and false negative
+  scenarios).
+
+
+  2. **SOUP Assessment**: Identify TensorFlow 2.8 and AWS cloud services as SOUP/OTS
+  components and outline the minimum documentation requirements for each per IEC 62304
+  Section 8, including functional and performance requirements, anomaly tracking,
+  and regression testing considerations.
+
+
+  3. **FDA Pathway Recommendation**: Recommend whether a 510(k), De Novo, or PMA pathway
+  is most appropriate, identify at least two potential predicate devices (with realistic
+  K-numbers), and explain the substantial equivalence argument or justification for
+  the chosen pathway.
+
+
+  4. **EU MDR Classification**: Classify the device under EU MDR 2017/745 Annex VIII
+  rules and identify the applicable conformity assessment route.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: intermediate

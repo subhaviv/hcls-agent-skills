@@ -1,0 +1,38 @@
+id: medical-device-software-compliance-03
+prompt: 'A startup called NovaDiag is developing a mobile application called "CardioAlert"
+  that analyzes ECG waveforms captured via a consumer-grade Bluetooth-connected electrode
+  patch and automatically classifies cardiac rhythms into four categories: Normal
+  Sinus Rhythm, Atrial Fibrillation, Bradycardia (<50 bpm), and Tachycardia (>100
+  bpm). The app runs entirely on the patient''s smartphone (iOS/Android) and displays
+  results directly to the patient without clinician review. The algorithm is a pre-trained
+  deep learning model (a third-party SOUP component from vendor "WaveNet Analytics
+  v2.3") integrated into the app''s codebase. The intended users are adult patients
+  aged 18–75 with known or suspected arrhythmia who self-monitor at home.
+
+
+  NovaDiag''s engineering team has completed initial development and needs to establish
+  their IEC 62304 software safety classification before beginning formal V&V activities.
+
+
+  Please provide the following:
+
+
+  1. **Safety Classification Determination**: Identify the correct IEC 62304 software
+  safety class (A, B, or C) for CardioAlert as a whole system, and justify your reasoning
+  by walking through the classification logic referencing ISO 14971 harm severity
+  and probability considerations.
+
+
+  2. **SOUP Assessment Summary**: For the WaveNet Analytics v2.3 component, list the
+  minimum required documentation elements NovaDiag must gather or generate per IEC
+  62304 Section 8 requirements, and flag at least two specific risks associated with
+  using this SOUP in a Class C context.
+
+
+  3. **Regulatory Pathway Recommendation**: Based on the device description, recommend
+  whether NovaDiag should pursue a 510(k), De Novo, or PMA pathway for FDA clearance/approval,
+  and identify at least one plausible predicate device if applicable.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: easy

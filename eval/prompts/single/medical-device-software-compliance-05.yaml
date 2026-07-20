@@ -1,0 +1,48 @@
+id: medical-device-software-compliance-05
+prompt: 'A startup has developed an AI-powered retinal imaging analysis tool called
+  "RetinaIQ" that automatically detects diabetic retinopathy (DR) severity and recommends
+  whether patients should be referred for ophthalmologist review. The software runs
+  as a standalone application on a cloud-based infrastructure accessed via web browser
+  by primary care physicians. Clinical validation was conducted on 4,200 patient scans
+  across three clinical sites, showing 94.2% sensitivity and 91.8% specificity for
+  detecting referable DR (moderate NPDR or worse).
+
+
+  The device team is preparing their FDA submission strategy and has the following
+  characteristics:
+
+  - The AI model uses a convolutional neural network trained on a proprietary dataset
+  of 180,000 labeled images
+
+  - The software directly influences triage decisions but a physician reviews all
+  flagged cases before treatment
+
+  - A predicate device (IDx-DR, K180014) exists as a cleared 510(k) for autonomous
+  DR detection
+
+  - The team plans to update the AI model quarterly based on real-world performance
+  data
+
+  - Third-party DICOM image processing library (version 3.4.2) is integrated as SOUP
+
+
+  Please provide:
+
+  1. A recommended FDA regulatory pathway with justification, addressing whether the
+  physician review loop affects the SaMD risk classification under IMDRF guidelines
+
+  2. An IEC 62304 software safety class determination with rationale
+
+  3. A SOUP assessment framework for the DICOM library including the key documentation
+  requirements
+
+  4. A Predetermined Change Control Plan (PCCP) outline addressing the quarterly model
+  updates, including the types of modifications that would vs. would not require a
+  new 510(k) submission
+
+  5. The top three cybersecurity considerations for the cloud-based deployment per
+  FDA''s 2023 cybersecurity guidance'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: intermediate
