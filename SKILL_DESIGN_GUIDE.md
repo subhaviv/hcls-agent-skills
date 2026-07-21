@@ -355,6 +355,10 @@ validated_against:  # pipeline skills only
 | Tables | ≤10 per skill | — | >12 tables → coherence risk |
 | Code blocks | ≤8 per skill | 14 | More code needs more decision logic to compensate |
 
+### MCP Tool References
+
+If your skill integrates with MCP tools, reference them by name as an optional enhancement; do not bundle server implementations in the skill directory.
+
 ---
 
 ## The Litmus Tests

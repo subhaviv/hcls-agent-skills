@@ -158,15 +158,60 @@ python -m eval.run --backend kiro-cli --parallel 2 --version v8 \
 
 Requires kiro-cli installed and authenticated. The agent config is auto-created at `.kiro/agents/hcls-eval.json`. Use `--kiro-model` to pin the model (recommended for reproducibility).
 
+## Running eval for a single skill
+
+Evaluation is **optional** for contributors (see [CONTRIBUTING.md](../CONTRIBUTING.md) step 8) — maintainers may run their own evaluation during review if you skip it. If you'd like to measure your skill's impact before opening a PR, run a scoped evaluation against only that skill's prompts. This is not a replacement for the full 410-prompt suite (which remains the statistical-power standard for repo-wide validation), but it gives an indicative smoke-test signal at minimal cost.
+
+**How it works:** `--prompts-dir` tells the runner where to find prompt YAML files. The loader scans `<dir>/single/*.yaml` and `<dir>/cross/*.yaml`. By creating a temporary directory containing only your target skill's prompt files, you scope execution to just those prompts.
+
+**If your skill is new,** it has no prompts yet — generate 30 first with `generate_prompts.py --skill <name> --count 30` (see [Regenerating Prompts](#regenerating-prompts) below). If you're evaluating an existing skill, its prompts already exist under `eval/prompts/single/`.
+
+**Worked example — evaluating a new skill `my-new-skill`:**
+
+```bash
+# 1. Generate 30 prompts for your new skill (requires Bedrock access)
+python eval/generate_prompts.py --skill my-new-skill --count 30
+
+# 2. Create a subset prompts directory with the required single/ subdirectory
+mkdir -p /tmp/eval-subset/single
+
+# 3. Copy only the target skill's prompt files
+cp eval/prompts/single/my-new-skill-*.yaml /tmp/eval-subset/single/
+
+# 4. Run the scoped evaluation
+python -m eval.run \
+  --prompts-dir /tmp/eval-subset \
+  --parallel 2 \
+  --version my-skill-test \
+  --pairwise
+
+# 5. Review results
+python eval/build_review.py
+open eval/results/review.html
+```
+
+At n=30 prompts, a single-skill run evaluates 30 prompts × 2 conditions = 60 executions + 30 pairwise judgments. This costs roughly **~$9** and takes **~30 minutes** at `--parallel 2`.
+
+> **Note:** n=30 is the recommended minimum for a contributor smoke test with some statistical signal. The full 410-prompt suite (10 prompts/skill × 38 skills + cross-skill combos) remains required for repo-wide, statistically meaningful conclusions.
+
 ## Regenerating Prompts
 
 Prompts are version-controlled and don't need regeneration. To regenerate:
 
 ```bash
+# Regenerate all prompts (38 skills + 3 cross-skill combos) at the standard 10/skill
 python eval/generate_prompts.py --force
+
+# Generate 30 prompts for a single (typically new) skill
+python eval/generate_prompts.py --skill my-new-skill --count 30
+
+# Regenerate an existing skill's prompts at the standard 10/skill
+python eval/generate_prompts.py --skill genomic-variant-interpretation --force
 ```
 
-Uses Claude Sonnet 4 (`us.anthropic.claude-sonnet-4-6`) via Bedrock. Generates 10 prompts per skill with varying difficulty (3 easy, 4 intermediate, 3 hard).
+The `--skill <name>` flag scopes generation to a single skill's prompt files in `eval/prompts/single/` and any cross-skill combos that include it. Omit `--skill` to regenerate the full suite. Use `--count <n>` to override the default of 10 prompts/skill — e.g. `--count 30` for a contributor evaluation run.
+
+Uses Claude Sonnet 4 (`us.anthropic.claude-sonnet-4-6`) via Bedrock. Generates 10 prompts per skill by default, with varying difficulty (3 easy, 4 intermediate, 3 hard); counts above 10 add further prompts at the same difficulty mix.
 
 ## Configuration
 

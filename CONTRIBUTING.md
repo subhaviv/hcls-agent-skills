@@ -29,13 +29,19 @@ Read these first — they define what a valid skill looks like:
    python tests/validate_skill.py --skill <skill-name>
    ```
 7. Walk through the [Quality Checklist](./QUALITY_CHECKLIST.md).
-8. Push to your fork and open a pull request describing the skill, its category, and example prompts used for testing.
+8. (Optional) Evaluate your skill. If you'd like to measure your skill's impact before opening a PR, generate 30 prompts and run the scoped eval:
+   ```bash
+   python eval/generate_prompts.py --skill <skill-name> --count 30 --force
+   ```
+   Then follow [Running eval for a single skill](./eval/README.md#running-eval-for-a-single-skill) to execute and review results. This step is optional — maintainers may run their own evaluation during review if you skip it.
+9. Push to your fork and open a pull request describing the skill, its category, and example prompts used for testing.
 
 ## Pull Request Guidelines
 
 - One skill per PR (unless tightly coupled).
 - Include 2+ example prompts and describe expected behavior.
 - All `validate_skill.py` checks must pass.
+- If you ran an evaluation (optional, see step 8), report the results in the PR description.
 - No PII or PHI in examples — use synthetic or public data.
 
 ## Code of Conduct

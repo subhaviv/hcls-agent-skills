@@ -11,6 +11,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SKILLS_DIR = REPO_ROOT / "skills"
 AGENTS_DIR = REPO_ROOT / "agents"
@@ -19,7 +21,7 @@ EXCLUDED_FILES = {
     "IMPLEMENTATION-GAPS.md",
     "validate_skill.py",
 }
-EXCLUDED_DIRS = {".git", ".kiro", "node_modules", "__pycache__", "tests", "results", ".venv", "dist", "build", ".eggs"}
+EXCLUDED_DIRS = {".git", ".kiro", ".agents", "node_modules", "__pycache__", "tests", "results", ".venv", "dist", "build", ".eggs"}
 
 REQUIRED_FRONTMATTER = ["name", "description", "usage", "version", "tags"]
 
@@ -65,12 +67,14 @@ def check_property_1():
             continue
 
         fm_text = parts[1]
-        fm = {}
-        for line in fm_text.strip().split("\n"):
-            if ":" in line:
-                key = line.split(":", 1)[0].strip()
-                val = line.split(":", 1)[1].strip()
-                fm[key] = val
+        try:
+            fm = yaml.safe_load(fm_text) or {}
+        except yaml.YAMLError as e:
+            error("P1", f"{entry.name}/SKILL.md invalid YAML frontmatter: {e}")
+            continue
+        if not isinstance(fm, dict):
+            error("P1", f"{entry.name}/SKILL.md frontmatter is not a mapping")
+            continue
 
         for field in REQUIRED_FRONTMATTER:
             if field not in fm:
@@ -80,11 +84,15 @@ def check_property_1():
             error("P1", f"{entry.name}/SKILL.md name='{fm['name']}' != folder name")
 
         if "tags" in fm:
-            tags_str = fm["tags"]
-            if not tags_str.startswith("[skill"):
-                # Check if first tag is skill
-                if "skill" not in tags_str.split(",")[0]:
-                    error("P1", f"{entry.name}/SKILL.md tags[0] is not 'skill'")
+            tags = fm["tags"]
+            # tags may be a YAML list (block or flow style) or, defensively,
+            # a plain string if hand-written outside spec.
+            if isinstance(tags, list):
+                first_tag = str(tags[0]) if tags else ""
+            else:
+                first_tag = str(tags).split(",")[0].strip().lstrip("[")
+            if "skill" not in first_tag:
+                error("P1", f"{entry.name}/SKILL.md tags[0] is not 'skill'")
 
 
 # -------------------------------------------------------------------------
@@ -148,9 +156,29 @@ def check_property_8():
         resources = data.get("resources", [])
         for res in resources:
             if res.startswith("skill://"):
-                skill_name = res.replace("skill://", "")
-                if not (SKILLS_DIR / skill_name).is_dir():
-                    error("P8", f"{fpath.name}: skill://{skill_name} does not resolve")
+                # skill:// is an install-time protocol that resolves to the
+                # target platform's .kiro/skills/ directory. In repo context,
+                # we strip the .kiro/skills/ prefix and validate against the
+                # repo's skills/ directory.
+                target_path = res.replace("skill://", "")
+                # Strip the .kiro/skills/ prefix to get the repo-relative pattern
+                kiro_prefix = ".kiro/skills/"
+                if target_path.startswith(kiro_prefix):
+                    repo_pattern = target_path[len(kiro_prefix):]
+                else:
+                    repo_pattern = target_path
+
+                # Handle glob patterns (e.g., "*/SKILL.md") by checking that
+                # at least one skill directory matches
+                if "*" in repo_pattern:
+                    matches = list(SKILLS_DIR.glob(repo_pattern))
+                    if not matches:
+                        error("P8", f"{fpath.name}: skill://{target_path} does not resolve to any skills")
+                else:
+                    # Explicit path — check it exists as file or directory
+                    resolved = SKILLS_DIR / repo_pattern
+                    if not resolved.exists():
+                        error("P8", f"{fpath.name}: skill://{target_path} does not resolve")
 
 
 # -------------------------------------------------------------------------
@@ -254,17 +282,19 @@ def check_property_15():
         if not skill_md.exists():
             continue
         content = skill_md.read_text()
-        # Extract description from frontmatter
+        # Extract description from frontmatter using yaml.safe_load
+        # to correctly handle multi-line scalars (description: > and |)
         parts = content.split("---", 2)
         if len(parts) < 3:
             continue
         fm_text = parts[1]
-        # Find description line(s) and look for Triggers include section
-        desc = ""
-        for line in fm_text.split("\n"):
-            if line.startswith("description:"):
-                desc = line.split(":", 1)[1].strip()
-                break
+        try:
+            fm = yaml.safe_load(fm_text)
+        except yaml.YAMLError:
+            continue
+        if not isinstance(fm, dict):
+            continue
+        desc = fm.get("description", "") or ""
         # Count quoted trigger keywords
         triggers = re.findall(r'"([^"]+)"', desc)
         if len(triggers) < 12:
@@ -337,13 +367,113 @@ def _iter_repo_files():
 # -------------------------------------------------------------------------
 # Main
 # -------------------------------------------------------------------------
+def _self_test():
+    """Regression tests for the validator's own parsing logic."""
+    import tempfile, shutil
+
+    test_dir = Path(tempfile.mkdtemp())
+    try:
+        # Test: multi-line folded scalar (description: >) with triggers
+        skill_dir = test_dir / "test-folded-scalar"
+        skill_dir.mkdir()
+        (skill_dir / "SKILL.md").write_text(
+            '---\n'
+            'name: test-folded-scalar\n'
+            'description: >\n'
+            '  Test skill for folded scalars. Use when the user asks about parsing.\n'
+            '  Triggers include "term1", "term2", "term3", "term4", "term5", "term6",\n'
+            '  "term7", "term8", "term9", "term10", "term11", "term12", "term13".\n'
+            'usage: Test.\n'
+            'version: 1.0.0\n'
+            'tags: [skill, category:reasoning]\n'
+            '---\n\n# Test\n'
+        )
+
+        # Parse the description using the same logic as check_property_15
+        content = (skill_dir / "SKILL.md").read_text()
+        parts = content.split("---", 2)
+        fm_text = parts[1]
+        fm = yaml.safe_load(fm_text)
+        desc = fm.get("description", "") or ""
+        triggers = re.findall(r'"([^"]+)"', desc)
+
+        assert len(triggers) == 13, (
+            f"Folded scalar test: expected 13 triggers, got {len(triggers)}. "
+            f"Description parsed as: {desc!r:.200}"
+        )
+
+        # Test: multi-line literal scalar (description: |) with triggers
+        skill_dir2 = test_dir / "test-literal-scalar"
+        skill_dir2.mkdir()
+        (skill_dir2 / "SKILL.md").write_text(
+            '---\n'
+            'name: test-literal-scalar\n'
+            'description: |\n'
+            '  Test skill for literal scalars. Use when the user asks about parsing.\n'
+            '  Triggers include "a1", "a2", "a3", "a4", "a5", "a6",\n'
+            '  "a7", "a8", "a9", "a10", "a11", "a12".\n'
+            'usage: Test.\n'
+            'version: 1.0.0\n'
+            'tags: [skill, category:pipeline]\n'
+            '---\n\n# Test\n'
+        )
+
+        content2 = (skill_dir2 / "SKILL.md").read_text()
+        parts2 = content2.split("---", 2)
+        fm_text2 = parts2[1]
+        fm2 = yaml.safe_load(fm_text2)
+        desc2 = fm2.get("description", "") or ""
+        triggers2 = re.findall(r'"([^"]+)"', desc2)
+
+        assert len(triggers2) == 12, (
+            f"Literal scalar test: expected 12 triggers, got {len(triggers2)}. "
+            f"Description parsed as: {desc2!r:.200}"
+        )
+
+        # Test: inline description (should still work)
+        skill_dir3 = test_dir / "test-inline"
+        skill_dir3.mkdir()
+        (skill_dir3 / "SKILL.md").write_text(
+            '---\n'
+            'name: test-inline\n'
+            'description: Inline description. Triggers include "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x12".\n'
+            'usage: Test.\n'
+            'version: 1.0.0\n'
+            'tags: [skill, category:reasoning]\n'
+            '---\n\n# Test\n'
+        )
+
+        content3 = (skill_dir3 / "SKILL.md").read_text()
+        parts3 = content3.split("---", 2)
+        fm_text3 = parts3[1]
+        fm3 = yaml.safe_load(fm_text3)
+        desc3 = fm3.get("description", "") or ""
+        triggers3 = re.findall(r'"([^"]+)"', desc3)
+
+        assert len(triggers3) == 12, (
+            f"Inline test: expected 12 triggers, got {len(triggers3)}. "
+            f"Description parsed as: {desc3!r:.200}"
+        )
+
+        print("Self-test PASSED ✓ (folded scalar, literal scalar, inline all parse correctly)")
+        return True
+    finally:
+        shutil.rmtree(test_dir)
+
+
 def main():
     global SKILL_FILTER
 
     parser = argparse.ArgumentParser(description="Validate HCLS skill properties")
     parser.add_argument("--skill", type=str, default=None,
                         help="Validate a single skill by name (e.g., genomic-variant-interpretation)")
+    parser.add_argument("--self-test", action="store_true",
+                        help="Run internal regression tests for the validator's parsing logic")
     args = parser.parse_args()
+
+    if args.self_test:
+        success = _self_test()
+        sys.exit(0 if success else 1)
 
     if args.skill:
         skill_path = SKILLS_DIR / args.skill

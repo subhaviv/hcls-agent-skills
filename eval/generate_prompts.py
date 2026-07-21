@@ -179,13 +179,29 @@ def main():
     parser = argparse.ArgumentParser(description="Generate eval prompts for HCLS skills")
     parser.add_argument("--force", action="store_true", help="Overwrite existing prompt files")
     parser.add_argument("--count", type=int, default=PROMPTS_PER_SKILL, help="Prompts per skill")
+    parser.add_argument("--skill", type=str, default=None,
+                        help="Generate prompts for a single skill by name (e.g., genomic-variant-interpretation)")
     args = parser.parse_args()
+
+    # Validate --skill if provided
+    if args.skill:
+        skill_path = SKILLS_DIR / args.skill
+        if not skill_path.is_dir():
+            print(f"ERROR: Skill '{args.skill}' not found in {SKILLS_DIR}")
+            raise SystemExit(1)
+        if not (skill_path / "SKILL.md").exists():
+            print(f"ERROR: Skill '{args.skill}' has no SKILL.md")
+            raise SystemExit(1)
 
     client = boto3.client("bedrock-runtime", region_name="us-west-2")
 
     # --- Single-skill prompts (N per skill) ---
-    skill_files = sorted(SKILLS_DIR.glob("*/SKILL.md"))
-    print(f"Found {len(skill_files)} skills, generating {args.count} prompts each")
+    if args.skill:
+        skill_files = [SKILLS_DIR / args.skill / "SKILL.md"]
+        print(f"Generating {args.count} prompts for skill: {args.skill}")
+    else:
+        skill_files = sorted(SKILLS_DIR.glob("*/SKILL.md"))
+        print(f"Found {len(skill_files)} skills, generating {args.count} prompts each")
 
     skill_cache: dict[str, dict] = {}
     for sf in skill_files:
@@ -215,8 +231,18 @@ def main():
         print(f"  {name}: {len(existing)}/{args.count} prompts")
 
     # --- Cross-skill prompts (N per combo) ---
-    print(f"\nGenerating {args.count} prompts for each of {len(CROSS_COMBOS)} cross-skill combos")
-    for combo in CROSS_COMBOS:
+    # When --skill is provided, only generate cross-skill prompts for combos
+    # that include the specified skill. Skip entirely if no combos match.
+    if args.skill:
+        cross_combos = [c for c in CROSS_COMBOS if args.skill in c["skills"]]
+        if not cross_combos:
+            print(f"\nNo cross-skill combos include '{args.skill}', skipping cross-skill generation")
+        else:
+            print(f"\nGenerating {args.count} prompts for {len(cross_combos)} cross-skill combo(s) including '{args.skill}'")
+    else:
+        cross_combos = CROSS_COMBOS
+        print(f"\nGenerating {args.count} prompts for each of {len(cross_combos)} cross-skill combos")
+    for combo in cross_combos:
         blocks = []
         for s in combo["skills"]:
             info = skill_cache.get(s)
