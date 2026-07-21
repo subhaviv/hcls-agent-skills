@@ -1,0 +1,19 @@
+id: provider-denial-workup-28
+prompt: 'A surgeon performed a laparoscopic cholecystectomy (CPT 47562) and an
+  incidental appendectomy (CPT 44950) during the same operative session. The payer
+  denied CPT 44950 with CARC CO-97: "Service included in the payment for another
+  procedure."
+
+
+  The operative note documents that the appendix appeared inflamed and the surgeon
+  elected to remove it to prevent future complications. NCCI edit tables show that
+  CPT 44950 and CPT 47562 are a column 1/column 2 pair with modifier indicator 1
+  (modifier allowed to bypass the edit).
+
+
+  Is this denial correct? If not, what corrective action should the practice take,
+  and what documentation is needed to support payment for both codes?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

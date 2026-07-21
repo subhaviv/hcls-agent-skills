@@ -1,0 +1,20 @@
+id: provider-denial-workup-25
+prompt: 'A billing manager has four denials on her desk and wants help triaging which
+  to appeal first. All denial dates are the same and the payer''s appeal window is
+  180 days.
+
+
+  Denial 1: CO-50, $4,200, MRI spine, documentation gap (records not attached)
+  Denial 2: CO-96, $850, cosmetic procedure (rhinoplasty), plan exclusion confirmed
+  Denial 3: CO-29, $12,600, inpatient stay, claim submitted on day 88 of 90-day window,
+    clearinghouse receipt available
+  Denial 4: CO-16, $620, missing referring provider NPI, referring provider NPI is
+    available in the practice management system
+
+
+  Rank these four denials by: (1) likelihood of successful appeal, and (2) ROI
+  (revenue recovered vs. effort required). What is the recommended action for each?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

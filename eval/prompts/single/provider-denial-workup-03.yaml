@@ -1,0 +1,18 @@
+id: provider-denial-workup-03
+prompt: 'A hospital outpatient department submitted a claim for CPT 27447 (total knee
+  arthroplasty) performed on March 15. The payer denied it on June 30 with CARC CO-29:
+  "Timely filing limit expired. Claim must be received within 90 days of date of service."
+
+
+  The billing manager has a clearinghouse acceptance report showing the claim was
+  electronically submitted on April 2 — 18 days after the date of service — and was
+  accepted by the clearinghouse. The claim appears to have been lost in the payer''s
+  adjudication system.
+
+
+  What is the correct posture for this denial? Draft the appeal letter with the specific
+  documentation that should be attached.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

@@ -1,0 +1,20 @@
+id: provider-denial-workup-04
+prompt: 'A cardiology practice submitted a claim for CPT 93306 (transthoracic echocardiogram
+  with Doppler) for a patient with new-onset shortness of breath and an ejection fraction
+  of 40% on a prior echo. The payer denied it with CARC CO-197: "Precertification/authorization
+  absent."
+
+
+  The practice obtained a prior authorization (PA number: 2024-88123) from the same
+  payer three weeks before the procedure for CPT 93306. However, the PA was issued
+  under a different rendering provider NPI (the supervising cardiologist) while the
+  claim was submitted under the performing sonographer''s NPI.
+
+
+  The payer''s own policy states authorization is valid for any provider in the same
+  practice group. Is this denial appealable? What posture should the practice take,
+  and what documentation should be included in the appeal?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

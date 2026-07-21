@@ -34,7 +34,7 @@ def validate_credentials(model_id: str | None = None) -> dict:
     # 2. Validate Bedrock access
     try:
         bedrock = boto3.client("bedrock", region_name="us-east-1")
-        bedrock.list_foundation_models(maxResults=1)
+        bedrock.list_foundation_models()
     except (BotoCoreError, ClientError) as e:
         raise PreflightError(
             f"Bedrock access check failed. Ensure your role has bedrock:ListFoundationModels permission.\n"

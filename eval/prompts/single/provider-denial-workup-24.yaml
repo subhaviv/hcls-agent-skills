@@ -1,0 +1,19 @@
+id: provider-denial-workup-24
+prompt: 'An endocrinologist ordered a continuous glucose monitor (CGM, HCPCS A9276)
+  for a patient with type 2 diabetes on basal insulin. The DME supplier''s claim
+  was denied by Medicare with CARC CO-50 citing LCD L33822: "CGM is covered for
+  insulin-treated diabetes requiring frequent adjustment. The record does not document
+  that the patient is performing frequent insulin dose adjustments."
+
+
+  The physician''s order states "basal insulin 20 units nightly." The endocrinologist''s
+  office note documents that the patient had three hypoglycemic episodes in the prior
+  month and that CGM was ordered to guide insulin titration and prevent hypoglycemia.
+
+
+  Is there a viable medical necessity argument? What documentation gap needs to be
+  addressed and what should the appeal focus on?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

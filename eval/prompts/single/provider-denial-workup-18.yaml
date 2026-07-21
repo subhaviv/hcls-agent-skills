@@ -1,0 +1,20 @@
+id: provider-denial-workup-18
+prompt: 'A home health agency received a denial for 30 days of home health services
+  (G0162, skilled nursing visits) following hospital discharge for a patient with
+  a new colostomy. The Medicare denial CARC is CO-50: "Patient is not homebound
+  per Medicare criteria."
+
+
+  The discharge summary documents: patient is 78 years old, uses a walker, lives
+  alone, and leaving home requires considerable and taxing effort due to deconditioning
+  after a 10-day hospitalization. The patient did attend one outpatient ostomy
+  education class during the denial period, which the payer cited as evidence the
+  patient is not homebound.
+
+
+  Is the payer''s homebound determination likely correct? What is the appeal posture?
+  Draft the key paragraph of the appeal letter addressing the homebound status argument.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

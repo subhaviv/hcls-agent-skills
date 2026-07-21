@@ -1,0 +1,28 @@
+id: provider-denial-workup-01
+prompt: 'A Medicare Advantage patient underwent a lumbar MRI (CPT 72148) ordered by
+  her primary care physician for low back pain with left leg radiculopathy. The claim
+  was denied by the payer with CARC CO-50 and RARC N386. The denial letter states:
+  "Service does not meet medical necessity criteria per clinical policy RAD-014. Documentation
+  does not show failure of at least 6 weeks of conservative therapy."
+
+
+  The medical record shows:
+
+  - 8 weeks of physical therapy (2×/week) from April 10 – June 5
+
+  - NSAIDs and activity modification documented in three office visits
+
+  - Positive straight leg raise test June 6
+
+  - Referring physician note: "MRI ordered for surgical candidacy evaluation"
+
+
+  The PT records were not attached to the original claim submission.
+
+
+  Please classify this denial, determine the appropriate appeal posture, and draft a
+  payer-ready appeal letter.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

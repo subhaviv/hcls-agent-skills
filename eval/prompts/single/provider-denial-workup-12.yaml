@@ -1,0 +1,20 @@
+id: provider-denial-workup-12
+prompt: 'A denial letter received today for a commercial insurance claim states: "CO-16:
+  Claim/service lacks information which is needed for adjudication. Additional information
+  is supplied using the following remittance advice remarks: N382 — Missing/incomplete/invalid
+  patient identifier."
+
+
+  The claim was submitted for CPT 70553 (MRI brain with and without contrast) for a
+  patient with new-onset seizures. The billing team cannot identify what patient
+  identifier is missing — the member ID, date of birth, and name on the claim match
+  the insurance card exactly.
+
+
+  The payer''s appeal deadline is 180 days from the denial date. What steps should
+  the billing team take before filing an appeal, and how should they approach the
+  appeal if resubmission alone does not resolve the issue?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

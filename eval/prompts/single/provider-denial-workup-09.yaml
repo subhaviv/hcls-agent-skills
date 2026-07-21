@@ -1,0 +1,21 @@
+id: provider-denial-workup-09
+prompt: 'A hospital submitted a claim for inpatient admission following an emergent
+  appendectomy. The payer denied the inpatient claim with CARC CO-4 and downgraded
+  it to observation status, resulting in a $12,400 payment reduction. The denial
+  letter states: "Medical necessity for inpatient level of care not established.
+  Clinical criteria support outpatient/observation status."
+
+
+  The patient was admitted post-operatively with a perforated appendix, received IV
+  antibiotics for 3 days, and was discharged on day 4. The admitting physician
+  documented "complex appendicitis with perforation and abscess formation" in the
+  H&P.
+
+
+  The hospital has 60 days remaining to appeal. Please classify this denial, recommend
+  the appeal posture, and outline the key clinical arguments the appeal letter should
+  make.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

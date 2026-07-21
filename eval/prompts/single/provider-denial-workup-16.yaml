@@ -1,0 +1,23 @@
+id: provider-denial-workup-16
+prompt: 'A revenue cycle manager is reviewing a stack of aged denials. She has three
+  claims, all denied with CO-29 (timely filing), and wants to know which ones are
+  worth appealing:
+
+
+  Claim A: DOS January 5. Payer timely filing limit 90 days. Claim submitted March 20
+  (day 74). Clearinghouse acceptance receipt available. Denied May 10.
+
+  Claim B: DOS February 1. Payer timely filing limit 90 days. Claim submitted June 15
+  (day 134). No clearinghouse receipt. The practice blames a staff transition for the
+  delay.
+
+  Claim C: DOS March 1. Payer timely filing limit 90 days. Claim submitted May 25
+  (day 85). The payer has a documented system outage from May 20–28 that prevented
+  electronic claim receipt. Outage notice is published on the payer''s provider portal.
+
+
+  Rank these three claims by likelihood of successful appeal and explain your reasoning.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

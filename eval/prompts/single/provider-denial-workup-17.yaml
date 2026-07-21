@@ -1,0 +1,19 @@
+id: provider-denial-workup-17
+prompt: 'A patient''s commercial plan denied CPT 43659 (unlisted laparoscopic procedure)
+  for a laparoscopic Heller myotomy for achalasia with CARC CO-50 and RARC N115:
+  "This service is considered experimental/investigational."
+
+
+  Laparoscopic Heller myotomy is the standard surgical treatment for achalasia and
+  has been performed routinely since the 1990s. The procedure is endorsed by the
+  American Society for Gastrointestinal Endoscopy and the Society of American
+  Gastrointestinal and Endoscopic Surgeons. The payer''s denial appears to be based
+  on the "unlisted" CPT code triggering an automatic experimental flag in their system.
+
+
+  What is the correct appeal posture? What documentation should accompany the appeal,
+  and is there a coding argument that could prevent this type of denial on future claims?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

@@ -1,0 +1,20 @@
+id: provider-denial-workup-14
+prompt: 'A payer denied a claim for CPT 99223 (high-complexity hospital initial visit)
+  with CARC CO-4: "Service requires prior authorization." The denial was received
+  60 days after the date of service. The hospitalist group did not obtain prior
+  authorization because their understanding was that inpatient admissions for emergent
+  conditions do not require PA under the patient''s plan.
+
+
+  The patient was admitted directly from the emergency department following a hypertensive
+  crisis with end-organ damage. The plan''s benefit summary states: "Emergency inpatient
+  admissions do not require prior authorization. Notification must be provided within
+  24 hours of admission."
+
+
+  The practice can document that a notification call was made to the payer at hour 20
+  of the admission. Is this denial correct? What is the appeal posture and argument?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

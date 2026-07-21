@@ -1,0 +1,25 @@
+id: provider-denial-workup-23
+prompt: 'A revenue cycle team received an 835 remittance with the following claim
+  adjustment segment for a psychiatric inpatient admission:
+
+  CLP: Claim level — $18,400 billed, $0 paid
+  CAS: CO, 96, 18400.00
+  MOA: MA01
+  NM1: payer name "Horizon Blue Cross"
+
+  RARC MA01 reads: "If you do not agree with what we approved for these services,
+  you may appeal our decision. Submit your appeal request to the address on your
+  Remittance Advice."
+
+
+  There is no other RARC explaining why CO-96 was applied. The patient has active
+  coverage and the service (inpatient psychiatric) is listed as a covered benefit
+  in the plan document.
+
+
+  How should the team approach this denial? What additional information should they
+  request from the payer before drafting the appeal?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium
