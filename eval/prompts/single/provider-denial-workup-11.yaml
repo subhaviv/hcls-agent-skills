@@ -1,0 +1,18 @@
+id: provider-denial-workup-11
+prompt: 'A neurology practice received a denial for CPT 95810 (polysomnography, ≥7
+  channels) with CARC CO-50. The denial letter states: "Clinical criteria not met.
+  Diagnosis of insomnia (G47.00) does not support polysomnography per LCD L34065."
+
+
+  The ordering physician documented the patient''s primary complaint as excessive
+  daytime sleepiness, loud snoring reported by spouse, and a STOP-BANG score of 6.
+  The ordering diagnosis submitted on the claim was G47.00 (insomnia) rather than
+  G47.33 (obstructive sleep apnea, unspecified) or R06.83 (snoring).
+
+
+  Is this a coding error or a medical necessity denial? What is the most appropriate
+  and fastest path to payment?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

@@ -1,0 +1,20 @@
+id: provider-denial-workup-15
+prompt: 'A dermatology practice received a denial for Mohs surgery (CPT 17311) on
+  a 2.1 cm basal cell carcinoma on the nose with CARC CO-50. The denial letter
+  states: "Medical necessity not established. Standard excision is appropriate for
+  this lesion size."
+
+
+  The American Academy of Dermatology and the American College of Mohs Surgery
+  guidelines indicate Mohs surgery is the preferred treatment for BCCs on the nose,
+  ears, eyelids, and lips regardless of size, due to the high cure rate and
+  tissue-sparing benefits in cosmetically sensitive areas.
+
+
+  The payer''s clinical policy cites lesion size ≥ 2 cm on the face as a criterion,
+  but the policy does not address location-specific indications. Draft an appeal
+  letter citing the applicable society guidelines.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

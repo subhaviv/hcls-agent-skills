@@ -1,0 +1,22 @@
+id: provider-denial-workup-30
+prompt: 'A hospital''s appeal for an inpatient observation downgrade was denied at
+  first level. The payer''s medical director upheld the denial, stating: "The patient
+  met criteria for observation status, not inpatient admission, at the time of the
+  admission decision." The denial involves a $9,400 payment difference and is for
+  a 68-year-old Medicare Advantage patient admitted for chest pain with a troponin
+  rise (0.08 ng/mL) who underwent cardiac catheterization (normal coronaries) and
+  was discharged after 2 nights.
+
+
+  The hospital has exhausted first-level appeal. The remaining options are: (1) second-level
+  internal appeal, (2) expedited external review by an Independent Review Organization,
+  or (3) accept the denial.
+
+
+  What factors should the hospital weigh in deciding between these options? What is
+  the clinical argument for inpatient status, and what is the realistic probability
+  of overturn at each level?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

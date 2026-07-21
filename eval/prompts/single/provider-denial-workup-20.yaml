@@ -1,0 +1,19 @@
+id: provider-denial-workup-20
+prompt: 'A large hospital system is reviewing a denial for a robotic-assisted hysterectomy
+  (CPT 58571 + S2900). The payer denied S2900 with CARC CO-97: "Included in the
+  allowance for another service." The hospital believes the robotic surgical system
+  charge should be separately billable.
+
+
+  The payer''s contract with the hospital does not explicitly address robotic surgery
+  add-on codes. The payer''s remittance shows CPT 58571 was paid at the contracted
+  rate, and S2900 was denied as bundled.
+
+
+  Is this denial appealable on clinical grounds, or is this a contract/administrative
+  issue? What is the appropriate appeal posture and next step for the revenue cycle
+  team?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

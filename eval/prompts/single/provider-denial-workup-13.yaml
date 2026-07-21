@@ -1,0 +1,19 @@
+id: provider-denial-workup-13
+prompt: 'A skilled nursing facility (SNF) submitted claims for 21 days of skilled
+  nursing care following a hip replacement. The Medicare Administrative Contractor
+  denied days 15–21 with CARC CO-50: "The patient no longer meets criteria for skilled
+  level of care."
+
+
+  The nursing notes for days 15–21 document ongoing wound care (sterile dressing
+  changes for a healing surgical incision), daily medication management for newly
+  started anticoagulation (warfarin with INR monitoring), and PT/OT 5 days per week.
+  The patient''s INR was labile, requiring dose adjustments on days 16, 18, and 20.
+
+
+  Please classify this denial and draft an appeal letter to the MAC arguing that
+  the skilled level of care criteria were met through day 21.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

@@ -1,0 +1,20 @@
+id: provider-denial-workup-05
+prompt: 'A multispecialty group practice received a denial for CPT 99215 (high-complexity
+  E&M) billed on the same day as CPT 11102 (tangential skin biopsy). The CARC is
+  CO-97: "The benefit for this service is included in the payment/allowance for another
+  service/procedure that has already been adjudicated."
+
+
+  The claim was submitted without modifier 25 on the E&M. The office note documents
+  a separately identifiable E&M visit for management of poorly controlled type 2
+  diabetes, including medication adjustment and A1C review, which is unrelated to
+  the skin lesion biopsy.
+
+
+  The denial date is today. The payer''s appeal window is 180 days. The billing manager
+  wants to know: (1) Is this a coding error or a denial to appeal? (2) What is the
+  fastest path to payment?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

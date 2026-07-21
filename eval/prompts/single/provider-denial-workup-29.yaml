@@ -1,0 +1,19 @@
+id: provider-denial-workup-29
+prompt: 'A revenue cycle director wants to implement a denial prevention program.
+  Her team analyzed last quarter''s denials and found the following top five denial
+  categories by dollar volume:
+
+  1. CO-4 / CO-197 (missing authorization): 34% of denied dollars
+  2. CO-50 (medical necessity): 28% of denied dollars
+  3. CO-16 (missing information): 18% of denied dollars
+  4. CO-29 (timely filing): 12% of denied dollars
+  5. CO-96 (non-covered benefit): 8% of denied dollars
+
+
+  She wants to know: for each category, what is the most common root cause, and what
+  is a single operational change the practice could make to reduce that denial type?
+  Prioritize by ROI (revenue recovered per dollar of operational investment).'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: easy

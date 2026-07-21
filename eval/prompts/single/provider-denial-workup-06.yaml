@@ -1,0 +1,18 @@
+id: provider-denial-workup-06
+prompt: 'A patient with stage III non-small cell lung cancer was denied an infusion
+  of pembrolizumab (HCPCS J9271) by her Medicare Advantage plan with CARC CO-56:
+  "Not medically necessary per plan clinical policy ONC-2024-11." The denial letter
+  states the patient''s PD-L1 expression was not documented.
+
+
+  The oncologist''s note from the prior visit documents PD-L1 TPS ≥ 50% on tumor
+  biopsy (pathology report dated two months prior). The note was in the chart but
+  not attached to the PA request. The patient''s next infusion is scheduled in 4 days.
+
+
+  Please classify this denial, determine whether it is urgent, and draft the shortest
+  possible appeal letter that could support an expedited review.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

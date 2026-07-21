@@ -1,0 +1,18 @@
+id: provider-denial-workup-19
+prompt: 'A gastroenterology practice received a denial for a screening colonoscopy
+  (CPT 45378) for a 45-year-old average-risk patient with CARC PR-204: "Not a
+  covered benefit for members under age 50."
+
+
+  The ACS and USPSTF updated their guidelines in 2021 to recommend colorectal cancer
+  screening beginning at age 45. The patient''s plan year began January 1, 2024.
+  The ACA requires commercial plans to cover USPSTF Grade A and B recommendations
+  with no cost-sharing.
+
+
+  The revenue cycle team is asking: is this denial correct under current law? What
+  is the appeal argument and what regulation should be cited?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

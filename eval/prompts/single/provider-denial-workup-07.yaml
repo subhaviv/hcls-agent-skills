@@ -1,0 +1,23 @@
+id: provider-denial-workup-07
+prompt: 'A Medicaid managed care plan denied CPT 90837 (60-minute psychotherapy) with
+  CARC CO-96 and RARC N20: "Service not covered. Benefit is limited to 45-minute
+  psychotherapy sessions (CPT 90834)."
+
+
+  The treating psychologist documents that the patient — a 17-year-old with severe
+  PTSD following a traumatic event — requires 60-minute sessions per trauma-focused
+  CBT protocol. The psychologist believes 45-minute sessions are clinically insufficient
+  for this evidence-based treatment.
+
+
+  The state Medicaid agency''s published benefit manual lists CPT 90837 as a covered
+  service for members under age 21 under the EPSDT mandate. The managed care plan''s
+  denial appears to contradict state policy.
+
+
+  What posture should the provider take? Draft a brief appeal letter citing the applicable
+  regulatory basis.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

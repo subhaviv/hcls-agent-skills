@@ -1,0 +1,17 @@
+id: provider-denial-workup-02
+prompt: 'A commercial insurer denied CPT 43239 (upper GI endoscopy with biopsy) for
+  a 55-year-old patient with a CARC of CO-96 and the following explanation: "This
+  service is not a covered benefit under the patient''s plan."
+
+
+  The patient has a standard PPO plan. Her EOB from six months ago shows that CPT 43235
+  (diagnostic upper GI endoscopy) was paid in full by the same payer. The biopsy was
+  taken during the same procedure session as the diagnostic portion.
+
+
+  The revenue cycle team is asking: should we appeal, and if so, on what grounds? What
+  is the correct posture for this denial?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

@@ -1,0 +1,18 @@
+id: provider-denial-workup-21
+prompt: 'A physical therapy group submitted claims for CPT 97110 (therapeutic exercise)
+  for 12 visits over 6 weeks for a patient recovering from a rotator cuff repair.
+  The payer denied visits 9–12 with CARC CO-50 and the note: "Maximum benefit of
+  8 PT visits per calendar year reached."
+
+
+  The patient''s plan is a self-funded ERISA plan administered by a commercial insurer.
+  The plan document states: "Physical therapy limited to 8 visits per calendar year
+  for musculoskeletal conditions."
+
+
+  The practice is asking: can this denial be appealed on medical necessity grounds?
+  Is there any argument for overturning a hard visit limit in an ERISA plan?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

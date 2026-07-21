@@ -1,0 +1,21 @@
+id: provider-denial-workup-26
+prompt: 'A hospital appeals coordinator is drafting a second-level appeal for an
+  inpatient sepsis case denied with CO-50. The first-level appeal was upheld. The
+  payer''s denial rationale states: "InterQual criteria for inpatient admission not
+  met on admission date. Patient could have been managed in observation."
+
+
+  The patient presented to the ED with fever 39.2°C, HR 118, WBC 18.4, lactate 2.8
+  mmol/L, and was treated with IV broad-spectrum antibiotics, IV fluids, and required
+  vasopressors for 18 hours. The patient''s Sepsis-3 criteria were met (SOFA score ≥2
+  from baseline).
+
+
+  At second-level appeal, the coordinator can request a physician-to-physician review.
+  What clinical arguments should the reviewing physician be prepared to make? What
+  specific data points from the record most directly refute the payer''s InterQual
+  determination?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

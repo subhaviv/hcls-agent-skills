@@ -1,0 +1,19 @@
+id: provider-denial-workup-22
+prompt: 'A radiation oncology center received a denial for IMRT (CPT 77385) for a
+  patient with prostate cancer (Gleason 7, T2b). The payer denied with CARC CO-50:
+  "Conventional 3D-CRT is equally effective and less costly for this risk category.
+  IMRT is not medically necessary."
+
+
+  The NCCN guidelines for prostate cancer list IMRT as an appropriate treatment for
+  intermediate-risk prostate cancer (which includes Gleason 7, T2b). The radiation
+  oncologist''s note states IMRT was chosen to reduce rectal toxicity risk due to the
+  patient''s prior abdominal surgery creating adhesions.
+
+
+  What is the posture for this appeal? Draft the core medical necessity argument paragraph
+  and identify the specific evidence that should be attached.'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: medium

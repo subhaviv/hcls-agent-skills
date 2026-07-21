@@ -1,0 +1,20 @@
+id: provider-denial-workup-08
+prompt: 'An orthopedic surgery center denied an appeal for CPT 29827 (arthroscopic
+  rotator cuff repair) with the following payer response: "Upon review, the initial
+  denial is upheld. The clinical record does not document failure of at least 12 weeks
+  of supervised physical therapy prior to surgical intervention per clinical policy
+  MSK-2024-07."
+
+
+  The chart shows 10 weeks of PT, not 12. The surgeon argues that the patient had a
+  full-thickness tear confirmed on MRI and that surgical intervention was appropriate
+  despite not completing 12 weeks of PT.
+
+
+  This is a first-level appeal that was upheld. What options remain? Should the
+  practice pursue a second-level appeal, and what is the realistic probability of
+  overturn? What posture should be used for the next step?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard

@@ -1,0 +1,18 @@
+id: provider-denial-workup-27
+prompt: 'A fertility clinic submitted a claim for IVF (CPT 58974) for a 34-year-old
+  patient with tubal factor infertility. The payer denied with CARC CO-96: "Infertility
+  treatment is not a covered benefit under this plan."
+
+
+  The patient''s employer is a large corporation headquartered in Illinois. Illinois
+  state law (215 ILCS 5/356m) mandates coverage of IVF for fully insured group
+  health plans. However, this is a self-funded ERISA plan, which is exempt from
+  state insurance mandates.
+
+
+  The billing team is asking whether to appeal. What is the correct posture and
+  what should the team tell the patient about her options?'
+target_skills:
+- provider-denial-workup
+domain: healthcare-ops
+difficulty: hard
