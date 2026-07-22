@@ -1,13 +1,13 @@
 # Agent Skills for Healthcare & Life Sciences
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT--0-yellow.svg)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-39-brightgreen.svg)](./skills/)
-[![Domains](https://img.shields.io/badge/Domains-11-blue.svg)](./skills/)
+[![Skills](https://img.shields.io/badge/Skills-40-brightgreen.svg)](./skills/)
+[![Domains](https://img.shields.io/badge/Domains-13-blue.svg)](./skills/)
 [![Works with](https://img.shields.io/badge/Works_with-Amazon_Quick_|_Kiro_|_Claude_Code_|_Codex-purple.svg)](#platform-compatibility)
 
-A curated collection of agent skills for healthcare and life sciences (HCLS) workflows, following the [Agent Skills open standard](https://agentskills.io). **These 39 domain skills make any AI agent measurably better at HCLS questions.** In a [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (380 single-skill + 30 cross-skill) judged by Claude Opus 4.7, skills win **70–86%** of head-to-head comparisons depending on harness, with **up to 85% critical thinking** and **up to 87% scientific accuracy** win rates. Skills work on 20+ platforms including Kiro, Amazon Quick, Amazon Bedrock AgentCore, AWS Strands SDK, Claude Code, OpenAI Codex, CrewAI, LangChain, and more.
+A curated collection of agent skills for healthcare and life sciences (HCLS) workflows, following the [Agent Skills open standard](https://agentskills.io). **These 40 domain skills make any AI agent measurably better at HCLS questions.** In a [410-prompt pairwise evaluation](./eval/TECHNICAL_REPORT.md) (380 single-skill + 30 cross-skill) judged by Claude Opus 4.7, skills win **70–86%** of head-to-head comparisons depending on harness, with **up to 85% critical thinking** and **up to 87% scientific accuracy** win rates. Skills work on 20+ platforms including Kiro, Amazon Quick, Amazon Bedrock AgentCore, AWS Strands SDK, Claude Code, OpenAI Codex, CrewAI, LangChain, and more.
 
-Skills fall into two categories: **reasoning skills** encode methodology, decision frameworks, and domain expertise to guide the agent's thinking (e.g., ACMG variant classification, target trial emulation, HEDIS measure specification); **pipeline skills** encode tool-specific commands, code patterns, and parameter tables that produce runnable artifacts (e.g., GATK4 variant calling, RDKit cheminformatics, HL7v2 parsing). Together they make any AI agent a competent collaborator across [genomics](#genomics), [single-cell analysis](#single-cell-analysis), [medical imaging](#medical-imaging), [protein structure](#protein-structure), [translational research](#cross-domain), [pharmacoepidemiology](#pharmacoepidemiology--real-world-data), [clinical data](#clinical-data), [drug discovery](#drug-discovery), [proteomics](#proteomics), [clinical data review](#clinical-data-review), [multi-omics integration](#multi-omics-integration), [healthcare operations](#healthcare-operations), [machine learning](#cross-domain), and [AWS architecture](#cross-domain).
+Skills fall into two categories: **reasoning skills** encode methodology, decision frameworks, and domain expertise to guide the agent's thinking (e.g., ACMG variant classification, target trial emulation, HEDIS measure specification); **pipeline skills** encode tool-specific commands, code patterns, and parameter tables that produce runnable artifacts (e.g., GATK4 variant calling, RDKit cheminformatics, HL7v2 parsing). Together they make any AI agent a competent collaborator across [genomics](#genomics), [single-cell analysis](#single-cell-analysis), [medical imaging](#medical-imaging), [protein structure](#protein-structure), [translational research](#cross-domain), [pharmacoepidemiology](#pharmacoepidemiology--real-world-data), [clinical data](#clinical-data), [drug discovery](#drug-discovery), [proteomics](#proteomics), [clinical data review](#clinical-data-review), [multi-omics integration](#multi-omics-integration), [healthcare operations](#healthcare-operations), [regulatory](#regulatory), [machine learning](#cross-domain), and [AWS architecture](#cross-domain).
 
 ## Why Agent Skills for Healthcare & Life Sciences? 
 
@@ -28,7 +28,7 @@ The biggest gains appear exactly where unguided agents fail most: on the hard, m
 This is what raises the floor for every scientist without lowering the ceiling. Skills don't skip the learning; they provide scaffolding so a new postdoc's analysis meets the same methodological standard as the PI's while they build understanding of *why* each step matters. The work shifts from instructing the agent ("here's how to avoid immortal time bias") to exercising judgment at a higher level ("is a new-user active-comparator design even the right approach?").
 ## Skill Catalog
 
-39 skills across 11 domains.
+40 skills across 13 domains.
 
 ### Genomics
 
@@ -129,6 +129,12 @@ This is what raises the floor for every scientist without lowering the ceiling. 
 | [quality-measures](./skills/quality-measures/) | pipeline | HEDIS calculation, enrollment checks, care gap detection, utilization rates |
 | [provider-denial-workup](./skills/provider-denial-workup/) | reasoning | CARC/RARC denial classification, appeal posture determination, appeal letter drafting |
 
+### Regulatory
+
+| Name | Category | Description |
+| --- | --- | --- |
+| [medical-device-software-compliance](./skills/medical-device-software-compliance/) | reasoning | IEC 62304 safety classification, FDA 510(k)/De Novo/PMA pathway, SOUP/OTS assessment, PCCP for AI/ML devices |
+
 ## Installation
 
 ```bash
@@ -196,6 +202,7 @@ The coordinator routes queries to 8 domain specialists:
 | hcls-healthcare-ops | Claims billing, risk adjustment, prior auth, HEDIS |
 | hcls-ai-infra | ML experiment design, AWS architecture |
 
+See [`docs/multiagent-architecture.md`](./docs/multiagent-architecture.md) for the full architecture.
 
 ### Amazon Quick
 
@@ -256,6 +263,33 @@ Or request a pipeline skill explicitly:
 ```
 > Use the digital-pathology skill to tile this SVS file at 20x with 512px tiles.
 ```
+
+## Chatbot Demo
+
+A browser-based frontend that connects to `kiro-cli acp` mode, showcasing skills with real-time streaming, subagent visualization, and tool call tracking.
+
+```bash
+cd demo
+npm install
+
+# Terminal 1 — frontend
+npm run dev
+
+# Terminal 2 — backend (point at any repo with skills installed)
+DEMO_CWD=/path/to/your/project npm run server
+```
+
+Open http://localhost:5173. Features:
+
+- **Agent selector** — switch between `hcls` (single agent) and `hcls-multiagent` (coordinator + specialists)
+- **Streaming markdown** — tables, code blocks, headers render in real-time
+- **Skill badges** — "★ Reading skill: risk-adjustment" appears inline when skills activate
+- **Subagent cards** — tabbed view per specialist with independent streaming content
+- **Inline tool chips** — compact file reads, searches, and commands as wrapping badges
+- **Sticky task list** — tracks agent progress at the top while scrolling
+- **Cancel button** — stops displaying output mid-stream
+
+See [`examples/healthcare-ops-chatbot-demo.md`](./examples/healthcare-ops-chatbot-demo.md) and [`examples/drug-discovery-chatbot-demo.md`](./examples/drug-discovery-chatbot-demo.md) for guided walkthroughs with sample prompts.
 
 ## Evaluation
 

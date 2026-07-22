@@ -55,6 +55,7 @@ DOMAIN_MAP = {
     "pa-decision-automation": "healthcare-ops",
     "quality-measure-specification": "healthcare-ops",
     "quality-measures": "healthcare-ops",
+    "provider-denial-workup": "healthcare-ops",
     "medical-device-software-compliance": "regulatory",
 }
 
