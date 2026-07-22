@@ -1,0 +1,42 @@
+id: medical-device-software-compliance-02
+prompt: 'A startup has developed a mobile application called "GlucoPilot" that analyzes
+  continuous glucose monitor (CGM) data and provides real-time insulin dosing recommendations
+  to Type 1 diabetic patients. The app connects via Bluetooth to a third-party CGM
+  sensor, runs a proprietary algorithm to calculate bolus insulin doses, and displays
+  the recommendation to the patient who then manually administers the insulin via
+  a separate pen injector. The app is intended for use by adults (18+) without requiring
+  clinician intervention for each dosing decision.
+
+
+  The development team has completed their initial software architecture and is preparing
+  their IEC 62304 documentation package. They are using three third-party software
+  libraries: (1) a Bluetooth connectivity library from a commercial vendor with full
+  documentation and a known bug list, (2) an open-source statistical math library
+  (last updated 18 months ago, no formal support), and (3) a UI rendering framework
+  maintained by a large technology company with regular security patches.
+
+
+  Please provide the following deliverables:
+
+
+  1. **IEC 62304 Software Safety Classification**: Determine the appropriate safety
+  class for GlucoPilot as a whole system and justify your reasoning based on the severity
+  of potential harm if the software fails.
+
+
+  2. **SOUP Assessment Table**: Create a structured assessment table for all three
+  third-party libraries covering: SOUP designation, risk level, required documentation
+  per IEC 62304 Section 8, and any gaps or concerns for each library.
+
+
+  3. **Regulatory Pathway Recommendation**: Identify the most likely FDA regulatory
+  pathway (510(k), De Novo, or PMA) for GlucoPilot and name at least one relevant
+  predicate device or device type if applicable.
+
+
+  4. **Top 3 Risk Items**: Using ISO 14971 framework, identify the three highest-priority
+  risk items for this device with suggested mitigations.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: easy

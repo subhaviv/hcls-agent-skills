@@ -1,0 +1,42 @@
+id: medical-device-software-compliance-01
+prompt: 'A startup is developing a mobile application called "GlycoGuard" that analyzes
+  continuous glucose monitor (CGM) data and provides insulin dosing recommendations
+  to Type 1 diabetic patients. The app runs on consumer smartphones (iOS/Android),
+  connects via Bluetooth to a third-party CGM device (the "DexLink Pro"), and uses
+  a proprietary algorithm to calculate bolus insulin doses ranging from 0.5–15 units.
+  In clinical testing with 847 patients over 6 months, the algorithm demonstrated
+  a 94.2% agreement rate with endocrinologist recommendations, with 12 instances of
+  dosing suggestions exceeding safe thresholds by more than 20%.
+
+
+  The development team has completed initial coding but has not yet established formal
+  design controls. They are preparing for a U.S. market submission and have identified
+  a potential predicate device (510(k) K183421) cleared in 2019 for a similar insulin
+  dosing advisory function.
+
+
+  Please provide the following:
+
+
+  1. **IEC 62304 Software Safety Classification**: Determine the appropriate safety
+  class for GlycoGuard and justify your reasoning based on the severity of potential
+  harm from incorrect dosing recommendations.
+
+
+  2. **FDA Regulatory Pathway Analysis**: Evaluate whether a 510(k), De Novo, or PMA
+  pathway is most appropriate, referencing the predicate device strategy and the clinical
+  data provided.
+
+
+  3. **Top 5 Risk Items**: Using ISO 14971 principles, identify the five highest-priority
+  risk items for this device, including the hazard, hazardous situation, and potential
+  harm for each.
+
+
+  4. **SOUP Assessment Requirement**: List the minimum documentation requirements
+  for the DexLink Pro CGM integration and the smartphone OS, treated as SOUP/OTS components
+  under IEC 62304.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: easy

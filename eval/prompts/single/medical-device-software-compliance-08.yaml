@@ -1,0 +1,41 @@
+id: medical-device-software-compliance-08
+prompt: 'Your company is developing **NeuroPace Insight**, an AI/ML-based SaMD that analyzes
+  continuous EEG waveforms from an implanted neurostimulator to autonomously adjust
+  stimulation parameters for drug-resistant epilepsy patients. The algorithm uses
+  a recurrent neural network (RNN) trained on 14,200 patient-hours of EEG data and
+  achieves 91.3% seizure-prediction sensitivity with 8.2% false-positive rate. The
+  device communicates via Bluetooth LE to a smartphone app, which relays dosing adjustments
+  to the implant. The implant itself is a previously cleared Class III PMA device
+  (P190047); NeuroPace Insight is a software-only companion that adds autonomous closed-loop
+  control not covered by the original PMA.
+
+
+  You must now plan the regulatory and quality strategy. Specifically:
+
+
+  1. **Regulatory pathway analysis**: Determine whether this SaMD requires a PMA supplement
+  (180-day vs. 30-day), De Novo, or standalone 510(k), citing the FDA''s Software
+  as a Medical Device guidance and the Digital Health Center of Excellence frameworks.
+  Justify your classification under the IMDRF SaMD risk framework (patient condition
+  severity × healthcare decision significance).
+
+
+  2. **IEC 62304 safety classification**: Assign a software safety class (A, B, or
+  C) with full rationale, identifying which software units would be classified differently
+  if the autonomous adjustment feature were removed.
+
+
+  3. **PCCP requirements**: The team plans quarterly RNN model updates using post-market
+  real-world data. Draft the key sections of a Predetermined Change Control Plan,
+  including the modification protocol, performance monitoring thresholds (define at
+  least 3 specific SaMD performance metrics with numeric acceptance criteria), and
+  reversion triggers.
+
+
+  4. **Cybersecurity gap analysis**: Identify the top 3 cybersecurity risks specific
+  to the Bluetooth LE communication channel per FDA''s 2023 cybersecurity premarket
+  guidance, with corresponding mitigations mapped to NIST CSF controls.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: hard

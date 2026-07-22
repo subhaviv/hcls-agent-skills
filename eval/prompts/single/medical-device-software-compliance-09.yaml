@@ -1,0 +1,39 @@
+id: medical-device-software-compliance-09
+prompt: 'Your company has developed an AI/ML-based SaMD that analyzes continuous glucose
+  monitor (CGM) data streams to predict hypoglycemic events 30–60 minutes in advance
+  and recommend insulin dose adjustments for Type 1 diabetic patients. The algorithm
+  was trained on 47,000 patient-days of data and validated on a held-out cohort of
+  8,200 patient-days, achieving a sensitivity of 91.3% and specificity of 88.7% for
+  hypoglycemia prediction (threshold: <70 mg/dL). The device interfaces with a Bluetooth-enabled
+  CGM (predicate cleared under K193482) and transmits recommendations to a companion
+  mobile app. Post-deployment, you anticipate retraining the model quarterly as real-world
+  data accumulates, with expected sensitivity drift of ±3–5% per update cycle.
+
+
+  Your regulatory team must prepare a comprehensive FDA submission strategy. Address
+  the following deliverables:
+
+
+  1. **Regulatory Pathway Analysis**: Justify whether this device should pursue 510(k),
+  De Novo, or PMA, given the insulin dosing recommendation function and the existing
+  CGM predicate. Identify the applicable product code and device class.
+
+
+  2. **Software Safety Classification**: Assign IEC 62304 safety class (A, B, or C)
+  with full rationale referencing the hazard of incorrect insulin dosing recommendations
+  and ISO 14971 severity/probability analysis.
+
+
+  3. **PCCP Framework**: Draft a Predetermined Change Control Plan outline covering
+  the quarterly retraining protocol, specifying: (a) the performance boundary conditions
+  that trigger a new submission vs. internal validation only, (b) required SaMD Pre-Specifications
+  (SPS) elements, and (c) the Algorithm Change Protocol (ACP) documentation requirements.
+
+
+  4. **Cybersecurity Considerations**: Identify the top three cybersecurity risks
+  specific to the Bluetooth CGM data pipeline and recommend corresponding mitigations
+  per FDA''s 2023 cybersecurity guidance.'
+target_skills:
+- medical-device-software-compliance
+domain: regulatory
+difficulty: hard
