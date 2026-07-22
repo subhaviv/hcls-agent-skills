@@ -33,7 +33,8 @@ These aren't obscure edge cases — they are the exact scenarios that generate C
 
 ## Why this is a skill, not a lookup
 
-COB can't be solved with RAG or a knowledge base because the user presents a novel fact pattern each time (different Medicare basis, different employer size, different denying payer). The skill has to apply rules to facts — it's a reasoning problem, not a retrieval problem. This is the category of problem where skills outperform baseline most reliably.
+COB can't be solved with RAG or a knowledge base because the user presents a novel fact pattern each time (different Medicare basis, different employer size, different denying payer). The skill has to apply rules to facts — it's a reasoning problem, not a retrieval problem. 
+This is the category of problem where skills outperform baseline most reliably.
 
 ---
 
@@ -85,4 +86,5 @@ The cross-skill prompts test the natural workflow: a CO-22 denial arrives, COB r
 
 - `SKILL.md` — skill definition
 - `../../eval/prompts/single/coordination-of-benefits-01..34.yaml` — 34 single-skill eval prompts
-- `../../eval/prompts/cross/cob-denial-workup-01..03.yaml` — 3 cross-skill prompts (COB + denial-workup)
+- `../../eval/prompts/cross/cob-denial-workup-01..03.yaml` — 3 cross-skill prompts (COB + provider-denial-workup)
+
