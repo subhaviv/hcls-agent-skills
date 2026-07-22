@@ -1,11 +1,5 @@
 id: medical-device-software-compliance-09
-prompt: 'Here is test question #9 of 10:
-
-
-  ---
-
-
-  Your company has developed an AI/ML-based SaMD that analyzes continuous glucose
+prompt: 'Your company has developed an AI/ML-based SaMD that analyzes continuous glucose
   monitor (CGM) data streams to predict hypoglycemic events 30–60 minutes in advance
   and recommend insulin dose adjustments for Type 1 diabetic patients. The algorithm
   was trained on 47,000 patient-days of data and validated on a held-out cohort of

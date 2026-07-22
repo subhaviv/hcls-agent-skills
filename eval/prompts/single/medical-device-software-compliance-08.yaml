@@ -1,11 +1,5 @@
 id: medical-device-software-compliance-08
-prompt: 'Here is test question #8 of 10:
-
-
-  ---
-
-
-  Your company is developing **NeuroPace Insight**, an AI/ML-based SaMD that analyzes
+prompt: 'Your company is developing **NeuroPace Insight**, an AI/ML-based SaMD that analyzes
   continuous EEG waveforms from an implanted neurostimulator to autonomously adjust
   stimulation parameters for drug-resistant epilepsy patients. The algorithm uses
   a recurrent neural network (RNN) trained on 14,200 patient-hours of EEG data and

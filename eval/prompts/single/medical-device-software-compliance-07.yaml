@@ -1,11 +1,5 @@
 id: medical-device-software-compliance-07
-prompt: 'Here is test question #7 of 10:
-
-
-  ---
-
-
-  Your company is developing **ClearPath AI**, a SaMD that analyzes retinal fundus
+prompt: 'Your company is developing **ClearPath AI**, a SaMD that analyzes retinal fundus
   images to detect diabetic retinopathy (DR) and generate a severity score (No DR,
   Mild, Moderate, Severe, Proliferative) for use by ophthalmologists in clinical decision-making.
   The algorithm is a deep learning CNN trained on 847,000 annotated images. The device
